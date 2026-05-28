@@ -1,0 +1,29 @@
+PATCH_AUDIT_v24_8_2.txt
+
+ฐานไฟล์:
+- ใช้ MelodyMelonTap_v24_8_patched_from_v24_7_1 เป็นฐาน
+- ไม่ได้ rewrite ใหม่จากศูนย์
+- เก็บ icon.png, manifest.json, sw.js, .nojekyll และ UI/audio pipeline เดิมไว้
+
+สิ่งที่แก้:
+1) ปรับเฉพาะ classifyRipenessV248_TEST9()
+2) ปรับ getRipenessExtraNoteV248() ให้ข้อความ debug ตรงกับกฎใหม่
+3) ไม่แตะโมเดล Brix / Firmness / Juice เพราะผู้ใช้แจ้งว่าใช้ได้ดีอยู่แล้ว
+
+Threshold v24.8.2:
+- A สุกเกิน: f_mean/useF < 430
+- B สุกจัด: 430–490
+- C สุกพอดี: 490–545
+- D ใกล้สุก: > 545
+
+Logic สำคัญ:
+- ลด hollow_correction เดิมที่แรงเกิน
+- ใช้ strong_overripe_signal เฉพาะ fm < 430 && hollow_index > 0.65 && f_std > 170
+- เพิ่ม C_protection: fm 490–545 && hollow_index < 0.68
+- เพิ่ม D_protection: fm >= 545 && hollow_index < 0.52
+- ลด flatness ให้เป็น weak tie-break เท่านั้น
+- harmonic_guard ยังอยู่ แต่ไม่ดึงผลแรงถึง A
+
+ไฟล์ที่ลบ:
+- ไม่ลบไฟล์ภายนอกเพิ่ม เพราะทุกไฟล์ในแพ็กเกจยังมีบทบาทต่อ PWA/UI
+- โค้ดเก่าที่ไม่ถูกเรียกถูกลบไปแล้วใน v24.8 patch ก่อนหน้า

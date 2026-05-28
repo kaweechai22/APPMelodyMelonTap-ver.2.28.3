@@ -598,49 +598,56 @@ function calibrateJuiceFieldV227(rawJuice, Q, fMean, fStd, hollowIndex, lowRatio
 
 
 function classifyRipenessV248_TEST9(lowRatio, highRatio, brix, firmness, juice, hollowPercent, fMean, fPeak, fStd, hollowIndex, flatness, rolloff85, peakCount){
-  // v24.8 TEST9 Patch, based on v24.7.1 audio/UI pipeline
-  // f_mean เป็นแกนหลัก, f_peak ใช้แค่ตรวจ harmonic, hollow_index ใช้ correction แบบ selective
+  // v24.8.2 App-Calibrated Patch
+  // ใช้ฐาน v24.8 ที่ patch จาก v24.7.1 เดิม แต่ปรับเฉพาะการจำแนกระดับความสุก
+  // เหตุผล: ข้อมูลแอปจริงพบว่า false "สุกเกิน" มากเกินไป จึงลด hollow override และคุมช่วง C ให้ปลอดภัยขึ้น
+  // ช่วง f_mean ใหม่จากข้อมูลแอปจริง:
+  // A < 430, B = 430–490, C = 490–545, D > 545
+
   const fm = safe(fMean, 0);
   const fp = safe(fPeak, 0);
   const fs = safe(fStd, 0);
   const hi = safe(hollowIndex, 0);
   const fl = safe(flatness, 0);
   const pc = safe(peakCount, 0);
-  const hPct = safe(hollowPercent, 0);
-  const firm = safe(firmness, 0);
-  const low = safe(lowRatio, 0);
 
   const harmonicFlag = (fp > 700 && fm < 620) || (fp > 1.75 * fm && fm < 560);
-  const fUse = harmonicFlag ? Math.min(fm, fp / 2) : fm;
+  const useF = harmonicFlag ? Math.min(fm, fp / 2) : fm;
 
   let group;
-  if(fUse < 455) group = "A";
-  else if(fUse < 495) group = "B";
-  else if(fUse < 560) group = "C";
-  else group = "D";
+  if(useF < 430) group = "A";       // สุกเกิน
+  else if(useF < 490) group = "B";  // สุกจัด
+  else if(useF < 545) group = "C";  // สุกพอดี
+  else group = "D";                 // ใกล้สุก
 
-  // D protection: ป้องกันใกล้สุกโดนลากไปสุกเกิน
-  if(fm >= 560 && hi < 0.50){
+  // C protection: ป้องกันลูกสุกพอดีโดนลากเป็นสุกเกิน
+  // ใช้หลัง base threshold เพื่อให้ช่วง 490–545 ยังรักษา C ไว้
+  const ripeProtection = (fm >= 490 && fm <= 545 && hi < 0.68);
+  if(ripeProtection){
+    group = "C";
+  }
+
+  // D protection: ป้องกันใกล้สุกโดนลากลงเป็น B/A
+  if(fm >= 545 && hi < 0.52){
     group = "D";
   }
 
-  // Hollow correction: ใช้เฉพาะ f_mean ไม่สูง เพื่อดึง A/B กลับมา โดยไม่ทำลาย D
-  if(hi >= 0.58 && fm < 520){
-    if(fm < 455 || hPct >= 18 || firm <= 9 || low > 0.42){
-      group = "A";
-    }else{
-      group = "B";
-    }
+  // Strong overripe only: ลด false A
+  // ไม่ใช้ hollow_index เดี่ยว ๆ แล้ว ต้องมี f_mean ต่ำ + hollow สูง + spread สูง
+  const strongOverripeSignal = (fm < 430 && hi > 0.65 && fs > 170);
+  if(strongOverripeSignal){
+    group = "A";
   }
 
-  // Flatness เป็นแค่ตัวช่วย เพราะ TEST9 พบว่า B/C overlap สูง
-  if(group === "C" && fm < 500 && fl >= 0.88 && (hi >= 0.52 || fs >= 170 || pc >= 10)){
+  // Weak flatness tie-break เท่านั้น เพราะ TEST9 พบว่า flatness overlap หนัก
+  if(group === "C" && fl > 0.92 && fm < 470 && (hi >= 0.60 || fs >= 190 || pc >= 12)){
     group = "B";
   }
 
-  // Structural anomaly แบบ guarded ไม่ให้กระทบ D
-  if(fm < 500 && hi >= 0.55 && fs >= 170 && fl >= 0.78){
-    group = (fm < 455) ? "A" : "B";
+  // Harmonic guard: ไม่ให้ f_peak สูงลากไป D/E
+  // ถ้า corrected frequency ต่ำกว่า 490 และเดิมตก C ให้ดึงลงเป็น B เท่านั้น ไม่ดึงแรงถึง A
+  if(harmonicFlag && useF < 490 && group === "C"){
+    group = "B";
   }
 
   return group;
@@ -657,23 +664,30 @@ function getRipenessExtraNoteV248(fMean, group, hollowPercent, firmness, lowRati
   const notes = [];
 
   if((fp > 700 && fm < 620) || (fp > 1.75 * fm && fm < 560)){
-    notes.push("harmonic_guard: พบ f_peak สูงผิดปกติ จึงลดน้ำหนัก f_peak");
+    notes.push("harmonic_guard: พบ f_peak สูงผิดปกติ จึงใช้ f_mean/f_peak÷2 ช่วยกัน ไม่ให้ peak หลอกผล");
   }
-  if(group === "D" && fm >= 560 && hi < 0.50){
+  if(group === "C" && fm >= 490 && fm <= 545 && hi < 0.68){
+    notes.push("C_protection: อยู่ในช่วงสุกพอดีของข้อมูลแอปจริง จึงป้องกันไม่ให้ถูกลากเป็นสุกเกิน");
+  }
+  if(group === "D" && fm >= 545 && hi < 0.52){
     notes.push("D_protection: f_mean สูงและ hollow_index ไม่สูง จึงคงผลเป็นใกล้สุก");
   }
-  if((group === "A" || group === "B") && hi >= 0.58 && fm < 520){
-    notes.push("hollow_correction: hollow_index สูงร่วมกับ f_mean ไม่สูง จึงดึงไปทางสุกจัด/สุกเกิน");
+  if(group === "A" && fm < 430 && hi > 0.65){
+    notes.push("strong_overripe_signal: f_mean ต่ำร่วมกับ hollow_index สูง จึงจัดเป็นสุกเกิน");
+  }
+  if(group === "B" && fm >= 430 && fm < 490){
+    notes.push("B_range: อยู่ในช่วงสุกจัดของ threshold v24.8.2");
   }
   if(group === "D" && fm > 650){
     notes.push("มีแนวโน้มยังดิบมาก");
   }
   if(group === "A" && (h >= 18 || firm <= 9 || low > 0.40)){
-    notes.push("คำเตือน: มีแนวโน้มสุกเกินหรือมีโพรงภายใน");
+    notes.push("คำเตือน: มีแนวโน้มสุกเกินหรือมีโพรงภายใน ควรตรวจซ้ำหรือผ่าดูประกอบ");
   }
-  if(fl > 0.88 && pc >= 10){
-    notes.push("flatness สูง แต่ใช้เป็นเพียงตัวช่วย ไม่ใช้ฟันธงเดี่ยว ๆ");
+  if(fl > 0.92 && pc >= 12){
+    notes.push("flatness สูง แต่ v24.8.2 ใช้เป็นเพียงตัวช่วย ไม่ใช้ฟันธงเดี่ยว ๆ");
   }
+
   return notes.join(" | ");
 }
 
@@ -779,7 +793,7 @@ function analyzeSession(){
   document.getElementById("confVal").innerText=`${conf.toFixed(0)} %`;document.getElementById("groupVal").innerText=`ช่วงสุก: ${group}`;
   setBar("brixBar",brix/14*100);setBar("firmBar",crispPct);setBar("juiceBar",juice);setBar("hollowBar",100-hollowPercent*2.5);setBar("confBar",conf);
   document.getElementById("featureList").innerHTML=`
-    <li>Q: ${Quse.toFixed(2)}</li><li>tau: ${tauUsed.toFixed(3)}</li><li>f_peak: ${avg.fPeak.toFixed(1)} Hz</li><li>f_mean: ${fMeanUse.toFixed(1)} Hz <b>(ใช้จำแนกระดับการสุก)</b></li><li>ripeness_extra_note: ${ripenessExtraNoteV248 || "-"}</li><li>f_std: ${fStdUse.toFixed(1)} Hz</li><li>f_variance: ${fVarUse.toFixed(1)}</li><li>hollow_index: ${hollowIndexUse.toFixed(3)}</li><li>Brix raw: ${brixRaw.toFixed(2)} °Bx → calibrated: ${brix.toFixed(2)} °Bx</li><li>Firmness raw model: ${firmnessRaw.toFixed(1)} N → calibrated: ${firmness.toFixed(1)} N</li><li>Juice raw: ${juiceRaw.toFixed(1)}% → calibrated: ${juice.toFixed(1)}%</li><li>Hollow raw: ${hollowRawPercent.toFixed(1)}% → v22.5: ${hollowPercentOriginal.toFixed(1)}% → v22.6: ${hollowPercent.toFixed(1)}%</li><li>high_ratio: ${highRatioUse.toFixed(3)}</li><li>low_ratio: ${lowRatioUse.toFixed(3)}</li><li>flatness: ${flatnessUse.toFixed(3)}</li><li>rolloff85: ${rolloff85Use.toFixed(1)} Hz</li><li>peak count: ${peakCountUse.toFixed(0)}</li><li>low_ratio: ${avg.lowRatio.toFixed(3)}</li><li>flatness: ${avg.flatness.toFixed(3)}</li><li>Audio120 ripeness label: ${ripenessLabel120}</li><li>Final ripeness group: ${group} (v24.8 TEST9 patched rule)</li><li>Perfect ripe meter: ${ripeMeter.toFixed(0)}/100</li><li>คุณภาพสัญญาณ: ${sigLabel} (${sigScore.toFixed(0)}%)</li><li>Q spread: ${qSpread.toFixed(2)}</li><li>tau fallback: ${tauFallbackCount}/${NUM_TAPS}</li><li>สถานะผล: ${warnLowQuality ? "ใช้ได้แต่ควรวัดซ้ำเพื่อยืนยัน" : "ใช้ได้"}</li>`;
+    <li>Q: ${Quse.toFixed(2)}</li><li>tau: ${tauUsed.toFixed(3)}</li><li>f_peak: ${avg.fPeak.toFixed(1)} Hz</li><li>f_mean: ${fMeanUse.toFixed(1)} Hz <b>(ใช้จำแนกระดับการสุก)</b></li><li>ripeness_extra_note: ${ripenessExtraNoteV248 || "-"}</li><li>f_std: ${fStdUse.toFixed(1)} Hz</li><li>f_variance: ${fVarUse.toFixed(1)}</li><li>hollow_index: ${hollowIndexUse.toFixed(3)}</li><li>Brix raw: ${brixRaw.toFixed(2)} °Bx → calibrated: ${brix.toFixed(2)} °Bx</li><li>Firmness raw model: ${firmnessRaw.toFixed(1)} N → calibrated: ${firmness.toFixed(1)} N</li><li>Juice raw: ${juiceRaw.toFixed(1)}% → calibrated: ${juice.toFixed(1)}%</li><li>Hollow raw: ${hollowRawPercent.toFixed(1)}% → v22.5: ${hollowPercentOriginal.toFixed(1)}% → v22.6: ${hollowPercent.toFixed(1)}%</li><li>high_ratio: ${highRatioUse.toFixed(3)}</li><li>low_ratio: ${lowRatioUse.toFixed(3)}</li><li>flatness: ${flatnessUse.toFixed(3)}</li><li>rolloff85: ${rolloff85Use.toFixed(1)} Hz</li><li>peak count: ${peakCountUse.toFixed(0)}</li><li>low_ratio: ${avg.lowRatio.toFixed(3)}</li><li>flatness: ${avg.flatness.toFixed(3)}</li><li>Audio120 ripeness label: ${ripenessLabel120}</li><li>Final ripeness group: ${group} (v24.8.2 app-calibrated rule)</li><li>Perfect ripe meter: ${ripeMeter.toFixed(0)}/100</li><li>คุณภาพสัญญาณ: ${sigLabel} (${sigScore.toFixed(0)}%)</li><li>Q spread: ${qSpread.toFixed(2)}</li><li>tau fallback: ${tauFallbackCount}/${NUM_TAPS}</li><li>สถานะผล: ${warnLowQuality ? "ใช้ได้แต่ควรวัดซ้ำเพื่อยืนยัน" : "ใช้ได้"}</li>`;
   saveHistory(ripe.label,brix,conf,melonScore,buyText,sigScore);
   speakSummaryAI({ripenessText:(ripenessExtraText || (group==="C" ? "แตงโมลูกนี้อยู่ในช่วงสุกพอดี" : ((group==="A"||group==="B") ? "แตงโมลูกนี้มีแนวโน้มสุกเกิน" : "แตงโมลูกนี้ใกล้สุก"))), sweetnessText:sweetnessLabel(brix), crispText, juiceText:juiceLabel(juice), hollowText, qualityText, hollowPercent});
   
