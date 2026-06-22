@@ -1,40 +1,391 @@
-<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>MelodyMelonTap v2.26.4</title><link rel="manifest" href="manifest.json"/><link rel="icon" href="icon.png"/><meta name="theme-color" content="#df1f2d"/><style>
+<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>MelodyMelonTap v2.27.1 Home Screen Start Flow</title><link rel="manifest" href="manifest.json"/><link rel="icon" href="icon.png"/><meta name="theme-color" content="#df1f2d"/><style>
 :root{
-  --theme:#e11d2e; --theme2:#ff4d5e; --soft:#fff1f2; --soft2:#ffe4e6;
-  --ink:#1f2933; --muted:#6b7280; --card:#ffffff; --line:#eceff3; --green:#1f7a3a;
+  --theme:#df1f2d; --theme2:#ff4d5e; --soft:#fff1f2; --soft2:#ffe4e6;
+  --ink:#1f2933; --muted:#6b7280; --card:#ffffff; --line:#eceff3;
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:linear-gradient(180deg,#fff,#f8fafc);color:var(--ink);min-height:100vh;transition:background .35s ease}
-body.state-raw{--theme:#1f8a3b;--theme2:#30b55b;--soft:#f0fdf4;--soft2:#dcfce7;background:linear-gradient(180deg,#f6fff8,#ffffff)}
-body.state-near{--theme:#d99a00;--theme2:#f4b400;--soft:#fff9e8;--soft2:#ffefb3;background:linear-gradient(180deg,#fffaf0,#ffffff)}
-body.state-ripe{--theme:#df1f2d;--theme2:#ff4757;--soft:#fff1f2;--soft2:#ffe4e6;background:linear-gradient(180deg,#fff7f7,#ffffff)}
-body.state-over{--theme:#60646b;--theme2:#8a8f99;--soft:#f4f4f5;--soft2:#e5e7eb;background:linear-gradient(180deg,#f8fafc,#ffffff)}
-.wrap{max-width:480px;margin:0 auto;padding:18px 16px 28px;position:relative;overflow:hidden;min-height:100vh}
-.bgFruit{position:fixed;inset:auto -60px -40px -60px;height:190px;background:radial-gradient(circle at 50% 120%,rgba(225,29,46,.28),transparent 62%);pointer-events:none;z-index:-1}
+body.state-raw{--theme:#2f9d44;--theme2:#57c46a;--soft:#f1fbf2;--soft2:#dbf6df;background:linear-gradient(180deg,#f5fff6,#ffffff)}
+body.state-near{--theme:#eba500;--theme2:#ffc52e;--soft:#fff9e7;--soft2:#fff0bc;background:linear-gradient(180deg,#fffaf0,#ffffff)}
+body.state-ripe{--theme:#ef2b2d;--theme2:#ff5a5f;--soft:#fff1f1;--soft2:#ffe0e3;background:linear-gradient(180deg,#fff7f7,#ffffff)}
+body.state-over{--theme:#9da3ad;--theme2:#c7ccd4;--soft:#f6f7f8;--soft2:#e6e9ed;background:linear-gradient(180deg,#fafbfc,#ffffff)}
+body.state-rot{--theme:#5f6368;--theme2:#8a9098;--soft:#f3f4f6;--soft2:#e5e7eb;background:linear-gradient(180deg,#f5f5f6,#ffffff)}
+
+.wrap{max-width:520px;margin:0 auto;padding:18px 14px 28px;position:relative;overflow:hidden;min-height:100vh}
+.bgFruit{
+  position:fixed;left:0;right:0;bottom:-18px;height:180px;
+  background:
+    radial-gradient(circle at 50% 130%, color-mix(in srgb,var(--theme) 28%, transparent), transparent 60%),
+    linear-gradient(180deg, transparent, transparent);
+  pointer-events:none;z-index:-1
+}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 14px}
 .iconBtn{width:44px;height:44px;border:0;border-radius:14px;background:#fff;color:#111;font-size:1.7rem;box-shadow:0 6px 16px rgba(0,0,0,.07);display:grid;place-items:center;cursor:pointer}
-.brand{font-size:1.55rem;font-weight:900;letter-spacing:.2px;color:#147a30;white-space:nowrap}.brand .red{color:#d7192b}.brand .melon{font-size:1.2rem;margin-left:4px}
-.sectionTitle{text-align:center;font-weight:900;font-size:1.1rem;margin:10px 0 12px}.sectionTitle:before,.sectionTitle:after{content:'•';color:var(--theme2);margin:0 12px}
-.hero{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:16px;box-shadow:0 14px 34px rgba(15,23,42,.09);display:grid;grid-template-columns:42% 1fr;gap:14px;align-items:center}
-.waterWrap{position:relative;display:grid;place-items:center}.watermelon{width:158px;height:158px;border-radius:50%;background:radial-gradient(circle at center,#ff5252 0 68%,#2e7d32 69% 100%);border:8px solid var(--theme);box-shadow:0 10px 28px rgba(0,0,0,.16);transition:border-color .35s,background .35s}
-.tapBadge{position:absolute;right:0;bottom:18px;width:54px;height:54px;border-radius:50%;background:var(--theme);color:#fff;display:grid;place-items:center;font-size:1.45rem;box-shadow:0 8px 20px rgba(0,0,0,.18)}
-.heroText{text-align:center}.crown{color:var(--theme);font-size:1.7rem}.ripeness{font-size:2.7rem;line-height:1.05;font-weight:1000;color:var(--theme);margin:4px 0}.ami{font-size:1.2rem;color:#333;margin-bottom:10px}.tapPill{display:inline-flex;align-items:center;gap:8px;border:1px solid color-mix(in srgb,var(--theme) 28%,#fff);color:#3f3f46;border-radius:999px;background:#fff;padding:8px 12px;font-size:.88rem}.tapPill b{color:var(--theme)}
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}.metric{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px;min-height:96px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 24px rgba(15,23,42,.06)}.metric.wide{grid-column:1/-1}.mIcon{width:50px;height:50px;border-radius:50%;background:var(--soft2);color:var(--theme);display:grid;place-items:center;font-size:1.5rem;flex:0 0 auto}.mLabel{font-size:.92rem;color:#333}.mValue{font-size:1.65rem;font-weight:900;color:#222;line-height:1.08}.mValue.good{color:var(--theme)}.mSub{font-size:.78rem;color:var(--muted);margin-top:3px}.bar{height:9px;background:#edf0f2;border-radius:999px;overflow:hidden;margin-top:6px}.fill{height:100%;background:linear-gradient(90deg,var(--theme2),var(--theme));width:0%}
-.resultLegacy{display:none}.clarityBadge{display:inline-block;padding:7px 11px;border-radius:999px;font-weight:800;margin-top:6px}.clarity-ok{background:#d9f5df;color:#176b25}.clarity-warn{background:#fff3cd;color:#8a6500}
-.aiCard{background:linear-gradient(180deg,var(--soft),#fff);border:1px solid color-mix(in srgb,var(--theme) 18%,#fff);border-radius:20px;padding:14px;margin-top:4px;display:flex;gap:12px;align-items:center}.aiBot{width:62px;height:62px;border-radius:20px;background:#fff;display:grid;place-items:center;font-size:2rem;box-shadow:0 8px 18px rgba(0,0,0,.07)}.aiTitle{font-weight:900;color:var(--theme);font-size:1.15rem}.aiText{color:#2f3337;line-height:1.55;font-size:.98rem}
-.mainBtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0}.btn{border:0;border-radius:15px;padding:13px 10px;font-weight:900;font-size:.98rem;background:var(--theme);color:#fff;box-shadow:0 10px 20px color-mix(in srgb,var(--theme) 26%,transparent);cursor:pointer}.btn.secondary{background:#fff;color:var(--theme);border:1px solid color-mix(in srgb,var(--theme) 28%,#fff);box-shadow:none}.subBtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}.subBtns .btn{background:#fff;color:#374151;border:1px solid var(--line);box-shadow:0 5px 14px rgba(0,0,0,.05)}
-details{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}summary{font-weight:800;color:#374151;cursor:pointer}.history{padding-left:20px;color:#374151}ul{margin-bottom:0}.extraRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.smallBtn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;color:#4b5563;font-weight:700}
-@media(max-width:420px){.hero{grid-template-columns:1fr}.ripeness{font-size:2.2rem}.watermelon{width:150px;height:150px}.mainBtns{grid-template-columns:1fr}.subBtns{grid-template-columns:1fr}.metrics{grid-template-columns:1fr}}
+.brand{font-size:1.55rem;font-weight:900;letter-spacing:.2px;color:#147a30;white-space:nowrap}
+.brand .red{color:#d7192b}
+.brand .melon{font-size:1.2rem;margin-left:4px}
+.sectionTitle{text-align:center;font-weight:900;font-size:1.12rem;margin:10px 0 14px}
+.sectionTitle:before,.sectionTitle:after{content:"❦";color:color-mix(in srgb,var(--theme) 70%, #fff);margin:0 10px;font-size:.88rem}
+
+.hero{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:16px 14px 16px;
+  box-shadow:0 14px 34px rgba(15,23,42,.09);
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap:10px 12px;
+  align-items:center
+}
+.heroVisual{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.waterWrap{position:relative;width:100%;min-height:228px;display:flex;align-items:center;justify-content:center}
+.watermelon{
+  --melon-flesh:#ff5252; --melon-ring:#ef2b2d;
+  width:196px;height:196px;border-radius:50%;
+  background:radial-gradient(circle at 46% 42%, #ffffff 0 58%, #f6f7f8 78%, #ffffff 100%);
+  border:8px solid var(--melon-ring);
+  box-shadow:0 12px 26px rgba(0,0,0,.14);
+  position:relative;overflow:hidden;display:block
+}
+.melonWhole{
+  position:absolute;left:28px;top:34px;width:132px;height:96px;border-radius:52% 48% 49% 51%/55% 51% 49% 45%;
+  background:
+   radial-gradient(circle at 16% 62%, #f5d16a 0 3px, transparent 4px),
+   repeating-linear-gradient(18deg, rgba(182,222,88,.98) 0 7px, rgba(40,114,38,.98) 7px 20px, rgba(18,76,33,.98) 20px 34px),
+   linear-gradient(135deg,#1d5e2e,#77b03c);
+  transform:rotate(-7deg);
+  box-shadow:0 12px 18px rgba(0,0,0,.2)
+}
+.melonSlice{
+  position:absolute;left:52px;top:116px;width:124px;height:58px;
+  clip-path:polygon(2% 0, 100% 0, 92% 100%, 8% 100%);
+  border-radius:0 0 72px 72px/0 0 58px 58px;
+  background:
+    radial-gradient(circle at 24% 52%, #1d1d1f 0 2px, transparent 3px),
+    radial-gradient(circle at 38% 44%, #1d1d1f 0 2px, transparent 3px),
+    radial-gradient(circle at 52% 57%, #1d1d1f 0 2px, transparent 3px),
+    radial-gradient(circle at 68% 47%, #1d1d1f 0 2px, transparent 3px),
+    radial-gradient(circle at 82% 58%, #1d1d1f 0 2px, transparent 3px),
+    linear-gradient(to bottom, var(--melon-flesh) 0 74%, #fff2f2 75% 82%, #7ab849 83% 100%);
+  box-shadow:0 10px 16px rgba(0,0,0,.15)
+}
+.tapAgainBtn{
+  position:absolute;right:10px;bottom:24px;transform:none;
+  width:66px;height:66px;border:4px solid #fff;border-radius:50%;
+  background:linear-gradient(135deg,var(--theme),var(--theme2));display:grid;place-items:center;
+  color:#fff;box-shadow:0 10px 18px rgba(0,0,0,.16);cursor:pointer
+}
+.tapAgainIcon{width:auto;height:auto;border-radius:0;background:transparent;color:#fff;display:block;font-size:1.5rem;box-shadow:none}
+.tapAgainLabel{display:none}
+.knockCount{font-size:1.03rem;color:#1f2937;font-weight:800}
+.knockCount b{color:var(--theme)}
+
+.heroInfo{
+  background:linear-gradient(180deg,#ffffff, color-mix(in srgb,var(--soft) 82%, #fff));
+  border:1px solid color-mix(in srgb,var(--theme) 18%, #fff);
+  border-radius:24px;
+  padding:12px 12px 14px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:8px
+}
+.ripenessHeader{
+  align-self:stretch;
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:30px;padding:5px 12px;border-radius:999px;
+  background:linear-gradient(135deg,var(--theme),var(--theme2));
+  color:#fff;font-size:.9rem;font-weight:900
+}
+.heroText{text-align:left;width:100%}
+.crown{color:var(--theme);font-size:1.5rem;line-height:1}
+.ripeness{font-size:2.45rem;line-height:1.05;font-weight:1000;color:var(--theme);margin:2px 0 4px}
+.ami{font-size:1.02rem;color:#28313b;line-height:1.4}
+.statusLine{
+  width:100%;display:flex;align-items:center;gap:8px;
+  color:#4b5563;font-size:.93rem;font-weight:700;
+  padding:0;margin:0
+}
+.statusDot{width:11px;height:11px;border-radius:50%;background:#16a34a;display:inline-block;flex:0 0 auto}
+.heroBadgeRow,.clarityWrap{width:100%;display:flex;justify-content:flex-start}
+.signalBadge{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:999px;font-weight:900;font-size:.92rem}
+.sig.sig-good,.signalBadge.sig-good{background:#dff5e1;color:#166534}
+.sig.sig-mid,.signalBadge.sig-mid{background:#fff3cd;color:#8a6500}
+.sig.sig-bad,.signalBadge.sig-bad{background:#fee2e2;color:#b91c1c}
+.clarityBadge{display:inline-block;padding:7px 12px;border-radius:999px;font-weight:800;margin-top:2px;font-size:.88rem}
+.clarity-ok{background:#d9f5df;color:#176b25}
+.clarity-warn{background:#fff3cd;color:#8a6500}
+.clarity-hidden{display:none}
+
+.primaryBtn{
+  grid-column:1/-1;width:100%;min-height:56px;border:0;border-radius:18px;
+  background:linear-gradient(135deg,var(--theme),var(--theme2));color:#fff;font-size:1.28rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  box-shadow:0 12px 24px color-mix(in srgb,var(--theme) 28%,transparent);cursor:pointer
+}
+.primaryBtn:disabled{opacity:.68;cursor:not-allowed}
+.heroMeta{
+  grid-column:1/-1;
+  display:flex;align-items:center;justify-content:center;gap:10px
+}
+.tapPill{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid color-mix(in srgb,var(--theme) 25%,#fff);color:#3f3f46;border-radius:999px;background:#fff;padding:10px 14px;font-size:.96rem;min-height:46px;flex:1}
+.tapPill b{color:var(--theme)}
+.plusCircleBtn{width:46px;height:46px;border:0;border-radius:50%;background:color-mix(in srgb,var(--soft2) 80%, #fff);color:var(--theme);font-size:1.9rem;font-weight:900;display:grid;place-items:center;cursor:pointer;box-shadow:0 6px 14px rgba(22,131,58,.08)}
+
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.metric{
+  background:#fff;border:1px solid var(--line);border-radius:22px;padding:13px;min-height:118px;
+  display:flex;align-items:center;gap:12px;box-shadow:0 10px 24px rgba(15,23,42,.06)
+}
+.metric.wide{grid-column:1/-1}
+.mIcon{width:56px;height:56px;border-radius:50%;background:var(--soft2);color:var(--theme);display:grid;place-items:center;font-size:1.6rem;flex:0 0 auto}
+.mLabel{font-size:.95rem;color:#333}
+.mValue{font-size:1.58rem;font-weight:900;color:#222;line-height:1.08;margin-top:2px}
+.mValue.good{color:var(--theme)}
+.mSub{font-size:.82rem;color:var(--muted);margin-top:3px}
+.bar{height:9px;background:#edf0f2;border-radius:999px;overflow:hidden;margin-top:8px}
+.fill{height:100%;background:linear-gradient(90deg,var(--theme2),var(--theme));width:0%}
+
+.resultLegacy{display:none}
+.aiCard{
+  background:linear-gradient(180deg,var(--soft),#fff);
+  border:1px solid color-mix(in srgb,var(--theme) 18%,#fff);
+  border-radius:24px;padding:14px;margin-top:4px;display:flex;gap:12px;align-items:center
+}
+.aiBot{width:62px;height:62px;border-radius:20px;background:#fff;display:grid;place-items:center;font-size:2rem;box-shadow:0 8px 18px rgba(0,0,0,.07)}
+.aiTitle{font-weight:900;color:var(--theme);font-size:1.15rem}
+.aiText{color:#2f3337;line-height:1.55;font-size:.98rem}
+
+.mainBtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:14px 0 10px}
+.btn{
+  border:0;border-radius:16px;padding:14px 10px;font-weight:900;font-size:1rem;background:#fff;color:#374151;
+  border:1px solid var(--line);box-shadow:0 5px 14px rgba(0,0,0,.05);cursor:pointer
+}
+.mainBtns .btn{
+  background:linear-gradient(135deg,var(--theme),var(--theme2));
+  color:#fff;border:none;box-shadow:0 10px 20px color-mix(in srgb,var(--theme) 24%,transparent)
+}
+.subBtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.subBtns .btn{
+  background:#fff;color:#374151;border:1px solid var(--line);box-shadow:0 5px 14px rgba(0,0,0,.05);
+  text-align:center;font-size:1.05rem;padding:16px 14px
+}
+
+details{margin-top:12px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:0;overflow:hidden;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+summary{font-weight:800;color:#374151;cursor:pointer;list-style:none;padding:16px 18px;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:'›';position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:1.4rem;color:#6b7280}
+details[open] summary::after{transform:translateY(-50%) rotate(90deg)}
+.history{padding:0 20px 16px;color:#374151}
+ul{margin-top:0;margin-bottom:0}
+.extraRow{display:flex;gap:10px;flex-wrap:wrap;margin:0 14px 14px}
+.smallBtn{border:1px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;color:#4b5563;font-weight:700}
+
+@media(max-width:420px){
+  .wrap{padding:16px 12px 26px}
+  .brand{font-size:1.32rem}
+  .hero{grid-template-columns: 1fr .92fr}
+  .waterWrap{min-height:204px}
+  .watermelon{width:172px;height:172px}
+  .melonWhole{left:25px;top:30px;width:118px;height:86px}
+  .melonSlice{left:46px;top:102px;width:112px;height:52px}
+  .tapAgainBtn{width:60px;height:60px;right:4px;bottom:20px}
+  .ripeness{font-size:2rem}
+  .ami{font-size:.95rem}
+  .heroInfo{padding:10px 10px 12px}
+  .statusLine{font-size:.86rem}
+  .signalBadge{font-size:.84rem;padding:7px 10px}
+  .primaryBtn{font-size:1.18rem;min-height:54px}
+  .tapPill{font-size:.88rem;padding:9px 10px}
+  .metrics{grid-template-columns:1fr 1fr}
+  .metric{min-height:110px;padding:11px;gap:8px}
+  .metric.wide{grid-column:1/-1}
+  .mValue{font-size:1.38rem}
+  .mainBtns,.subBtns{grid-template-columns:1fr 1fr 1fr}
+}
+
+/* ===== Home Screen v2.27.1 ===== */
+.homeScreen{animation:fadeIn .25s ease both}
+.homeScreen[hidden],.resultScreen[hidden]{display:none!important}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.homeTitle{text-align:center;margin:18px 0 8px}
+.homeTitle h1{margin:0;font-size:2.05rem;line-height:1.1;font-weight:1000;letter-spacing:.2px}
+.homeTitle .green{color:#147a30}.homeTitle .red{color:#df1f2d}
+.homeSubtitle{text-align:center;color:#4b5563;font-size:1.08rem;line-height:1.45;margin:0 auto 12px;max-width:420px}
+
+.homeFruit{position:relative;min-height:280px;display:flex;align-items:center;justify-content:center;margin-top:4px}
+.homeFruit::before,.homeFruit::after{
+  content:"";position:absolute;top:46%;width:34%;height:94px;opacity:.45;
+  background:repeating-linear-gradient(90deg,transparent 0 13px,color-mix(in srgb,#1f8a3b 45%,transparent) 13px 17px,transparent 17px 27px);
+  mask:radial-gradient(ellipse at center,#000 0 55%,transparent 72%);
+}
+.homeFruit::before{left:0}.homeFruit::after{right:0;transform:scaleX(-1)}
+.homeFruitGlow{position:absolute;width:260px;height:210px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,#dff5e1 70%,transparent),transparent 70%)}
+.homeMelonWhole{
+  position:absolute;z-index:2;width:208px;height:166px;border-radius:52% 48% 49% 51%/56% 54% 46% 44%;
+  background:
+   radial-gradient(circle at 48% -5%,#65743e 0 8px,transparent 9px),
+   radial-gradient(circle at 16% 58%,#e6cf65 0 4px,transparent 5px),
+   repeating-linear-gradient(18deg,rgba(183,224,85,.98) 0 9px,rgba(47,118,40,.98) 9px 24px,rgba(18,78,34,.98) 24px 42px),
+   linear-gradient(135deg,#1b5b2e,#77b03c);
+  transform:rotate(-4deg) translateX(-18px);
+  box-shadow:0 16px 24px rgba(0,0,0,.20)
+}
+.homeMelonStem{position:absolute;z-index:3;top:28px;left:50%;width:34px;height:30px;border:6px solid #6b7c3a;border-left:0;border-bottom:0;border-radius:0 25px 0 0;transform:translateX(-16px) rotate(-20deg)}
+.homeMelonSlice{
+  position:absolute;z-index:4;width:214px;height:88px;left:50%;top:150px;
+  transform:translateX(-4%) rotate(-2deg);
+  clip-path:polygon(0 0,100% 0,92% 100%,8% 100%);
+  border-radius:0 0 120px 120px/0 0 86px 86px;
+  background:
+    radial-gradient(circle at 22% 54%,#151515 0 3px,transparent 4px),
+    radial-gradient(circle at 37% 45%,#151515 0 3px,transparent 4px),
+    radial-gradient(circle at 52% 60%,#151515 0 3px,transparent 4px),
+    radial-gradient(circle at 68% 47%,#151515 0 3px,transparent 4px),
+    radial-gradient(circle at 82% 58%,#151515 0 3px,transparent 4px),
+    linear-gradient(to bottom,#ff3f48 0 74%,#fff2f2 75% 82%,#6fb345 83% 100%);
+  box-shadow:0 12px 20px rgba(0,0,0,.18)
+}
+
+.homeStartBtn{
+  width:100%;min-height:66px;border:0;border-radius:999px;
+  background:linear-gradient(135deg,#ef2b2d,#d7192b);color:#fff;
+  font-size:1.45rem;font-weight:1000;display:flex;align-items:center;justify-content:center;gap:12px;
+  box-shadow:0 18px 30px rgba(223,31,45,.28);cursor:pointer;margin:4px 0 14px
+}
+.homeStartBtn .micCircle{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center;font-size:1.45rem}
+
+.homeTip{
+  display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #d9eadc;border-radius:20px;
+  padding:13px 16px;box-shadow:0 8px 20px rgba(15,23,42,.05);margin:0 0 16px
+}
+.homeTipIcon{width:58px;height:58px;border-radius:16px;background:#edf9ef;display:grid;place-items:center;font-size:2rem}
+.homeTip b{color:#147a30;font-size:1.05rem}.homeTip p{margin:3px 0 0;color:#4b5563}
+
+.ripenessLegendBox{background:#fff;border:1px solid var(--line);border-radius:22px;padding:12px;box-shadow:0 8px 20px rgba(15,23,42,.04);margin-bottom:16px}
+.ripenessLegendTitle{text-align:center;font-weight:900;margin-bottom:10px;color:#25313b}
+.ripenessChips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ripenessChip{min-height:48px;border-radius:16px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:.88rem;font-weight:900;border:1px solid transparent;padding:6px;text-align:center}
+.ripenessChip.raw{background:#eef9f0;color:#1f8a3b;border-color:#d6efdc}
+.ripenessChip.near{background:#fff7df;color:#d99a00;border-color:#f4df9b}
+.ripenessChip.ripe{background:#fff0f1;color:#df1f2d;border-color:#f5cfd3}
+.ripenessChip.bad{background:#f4f4f5;color:#5f6368;border-color:#e5e7eb}
+
+.homeTools{background:#fff;border:1px solid var(--line);border-radius:22px;display:grid;grid-template-columns:1fr 1fr 1fr;overflow:hidden;box-shadow:0 8px 20px rgba(15,23,42,.04)}
+.homeToolBtn{border:0;background:#fff;padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:900;color:#147a30;cursor:pointer}
+.homeToolBtn:not(:last-child){border-right:1px solid var(--line)}
+.homeToolIcon{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#eff8ef;font-size:1.35rem}
+.homeToolBtn:nth-child(2){color:#d99a00}.homeToolBtn:nth-child(2) .homeToolIcon{background:#fff6dc}
+.homeToolBtn:nth-child(3){color:#1f8a3b}
+
+.homeBottomFruit{height:90px;margin:8px -14px -28px;background:
+  radial-gradient(ellipse at 88% 82%,#ff4a52 0 28%,#fff 29% 35%,#6fb345 36% 42%,transparent 43%),
+  radial-gradient(ellipse at 18% 80%,rgba(86,157,69,.25),transparent 55%);
+  opacity:.9
+}
+
+@media(max-width:420px){
+  .homeTitle h1{font-size:1.78rem}
+  .homeSubtitle{font-size:.98rem}
+  .homeFruit{min-height:246px}
+  .homeMelonWhole{width:188px;height:148px}
+  .homeMelonSlice{width:190px;height:78px;top:140px}
+  .homeStartBtn{font-size:1.28rem;min-height:60px}
+  .ripenessChips{gap:6px}
+  .ripenessChip{font-size:.78rem;border-radius:14px}
+}
+
 </style></head><body><div class="bgFruit"></div><div class="wrap">
 <header class="topbar"><button class="iconBtn" aria-label="เมนู">☰</button><div class="brand">Melody<span class="red">Melon</span>Tap <span class="melon">🍉</span></div><button class="iconBtn" id="shareBtn" aria-label="แชร์">⇧</button></header>
+<section id="homeScreen" class="homeScreen">
+  <div class="homeTitle">
+    <h1><span class="green">พร้อมวัด</span><span class="red">คุณภาพแตงโม</span></h1>
+  </div>
+  <p class="homeSubtitle">วิเคราะห์ความสุก หวาน กรอบ น้ำฉ่ำ และโพรง<br>จากการเคาะเพียง 3 ครั้ง</p>
+
+  <div class="homeFruit" aria-label="ภาพแตงโมและคลื่นเสียง">
+    <div class="homeFruitGlow"></div>
+    <div class="homeMelonStem"></div>
+    <div class="homeMelonWhole"></div>
+    <div class="homeMelonSlice"></div>
+  </div>
+
+  <button id="homeStartBtn" class="homeStartBtn" type="button">
+    <span class="micCircle">🎙️</span>
+    <span>เริ่มวัดเสียงเคาะ</span>
+  </button>
+
+  <div class="homeTip">
+    <div class="homeTipIcon">🍉👆</div>
+    <div>
+      <b>เคาะแตงโม 3 ครั้ง</b>
+      <p>ให้เสียงชัดและห่างกันเล็กน้อย</p>
+    </div>
+  </div>
+
+  <div class="ripenessLegendBox">
+    <div class="ripenessLegendTitle">ระดับความสุก</div>
+    <div class="ripenessChips">
+      <div class="ripenessChip raw">🌱 ดิบ</div>
+      <div class="ripenessChip near">☀️ ใกล้สุก</div>
+      <div class="ripenessChip ripe">🍉 สุกพอดี</div>
+      <div class="ripenessChip bad">⚠️ อาจเน่า/สุกเกิน</div>
+    </div>
+  </div>
+
+  <div class="homeTools">
+    <button id="homeHistoryBtn" class="homeToolBtn" type="button"><span class="homeToolIcon">↺</span><span>ประวัติ</span><small>ดูผลที่ผ่านมา</small></button>
+    <button id="homeHowToBtn" class="homeToolBtn" type="button"><span class="homeToolIcon">📖</span><span>วิธีใช้</span><small>แนะนำการใช้งาน</small></button>
+    <button id="homeSettingsBtn" class="homeToolBtn" type="button"><span class="homeToolIcon">⚙️</span><span>ตั้งค่า</span><small>ปรับแต่ง</small></button>
+  </div>
+
+  <div class="homeBottomFruit" aria-hidden="true"></div>
+</section>
+<div id="resultScreen" class="resultScreen" hidden>
+
 <div class="sectionTitle">ผลการวิเคราะห์</div>
-<section class="hero"><div class="waterWrap"><div id="watermelon" class="watermelon"></div><div class="tapBadge">🔨</div></div><div class="heroText"><div class="crown">♛</div><div id="ripenessVal" class="ripeness">-</div><div id="amiVal" class="ami">พร้อมรับประทาน</div><div class="tapPill">〰 วิเคราะห์จากการเคาะ <b><span id="tapProgress">0/3</span></b> ครั้ง</div><div id="clarityBadge" class="clarityBadge clarity-ok">-</div></div></section>
-<div class="resultLegacy" id="result">ยังไม่มีผลลัพธ์</div><div style="display:none"><span id="melonScore">-</span><span id="buyBadge" class="buyBadge">-</span><span id="scoreExplain">ยังไม่มีการประเมิน</span></div><div id="status" style="text-align:center;margin:10px 0;color:#6b7280">สถานะ: พร้อมเริ่มวัด</div><div style="text-align:center;margin-bottom:10px"><span id="signalBadge" class="clarityBadge clarity-warn">คุณภาพสัญญาณ: รอวัด</span></div>
+
+<section class="hero">
+  <div class="heroVisual">
+    <div class="waterWrap">
+      <div id="watermelon" class="watermelon" aria-label="รูปแตงโม">
+        <div class="melonWhole"></div>
+        <div class="melonSlice"></div>
+      </div>
+      <button id="tapAgainBtn" class="tapAgainBtn" type="button" aria-label="เคาะอีกครั้ง">
+        <span class="tapAgainIcon">🔨</span>
+        <span class="tapAgainLabel">เคาะอีกครั้ง</span>
+      </button>
+    </div>
+    <div class="knockCount">เคาะ: <b><span id="tapProgress">0/3</span></b> ครั้ง</div>
+  </div>
+
+  <div class="heroInfo">
+    <div class="ripenessHeader">ระดับการสุก</div>
+    <div class="heroText">
+      <div class="crown">♛</div>
+      <div id="ripenessVal" class="ripeness">-</div>
+      <div id="amiVal" class="ami">พร้อมรับประทาน</div>
+    </div>
+    <div id="status" class="statusLine"><span class="statusDot"></span><span id="statusText">สถานะ: พร้อมเริ่มวัด</span></div>
+    <div class="heroBadgeRow"><span id="signalBadge" class="signalBadge sig sig-mid">คุณภาพสัญญาณ: รอวัด</span></div>
+    <div class="clarityWrap"><span id="clarityBadge" class="clarityBadge clarity-hidden">-</span></div>
+  </div>
+
+  <button id="startBtn" class="btn primaryBtn" type="button">🎙️ <span id="startBtnLabel">เริ่มวัด</span></button>
+
+  <div class="heroMeta">
+    <div class="tapPill">〰 วิเคราะห์จากการเคาะ <b><span id="tapProgressHero">0/3</span></b> ครั้ง</div>
+    <button id="tapManualBtn" class="plusCircleBtn" type="button" aria-label="เริ่มวัด">+</button>
+  </div>
+</section>
+
+<div class="resultLegacy" id="result">ยังไม่มีผลลัพธ์</div><div style="display:none"><span id="melonScore">-</span><span id="buyBadge" class="buyBadge">-</span><span id="scoreExplain">ยังไม่มีการประเมิน</span></div>
 <section class="metrics"><div class="metric"><div class="mIcon">▮</div><div><div class="mLabel">ความหวาน</div><div id="brixVal" class="mValue">-</div><div id="sweetnessText" class="mSub">-</div><div class="bar"><div id="brixBar" class="fill"></div></div></div></div><div class="metric"><div class="mIcon">✹</div><div><div class="mLabel">ความกรอบ</div><div id="firmVal" class="mValue">-</div><div id="firmText" class="mSub">-</div><div class="bar"><div id="firmBar" class="fill"></div></div></div></div><div class="metric"><div class="mIcon">●</div><div><div class="mLabel">ความฉ่ำ</div><div id="juiceVal" class="mValue">-</div><div id="juiceText" class="mSub">-</div><div class="bar"><div id="juiceBar" class="fill"></div></div></div></div><div class="metric"><div class="mIcon">○</div><div><div class="mLabel">โพรงภายใน</div><div id="hollowVal" class="mValue good">-</div><div id="hollowText" class="mSub">-</div><div class="bar"><div id="hollowBar" class="fill"></div></div></div></div><div class="metric wide"><div class="mIcon">🛡</div><div style="width:100%"><div class="mLabel">ความเชื่อมั่น</div><div id="confVal" class="mValue good">-</div><div id="groupVal" class="mSub">-</div><div class="bar"><div id="confBar" class="fill"></div></div></div></div></section>
 <div class="aiCard"><div class="aiBot">🤖</div><div><div class="aiTitle">สรุปโดย AI</div><div id="aiSummaryText" class="aiText">ผลสรุปจะแสดงหลังวิเคราะห์เสร็จ</div></div></div>
-<div class="mainBtns"><button id="startBtn" class="btn">↻ เริ่มวิเคราะห์ใหม่</button><button id="voiceBtn" class="btn">🔊 ฟังผล</button><button id="saveBtn" class="btn">▯ บันทึกผล</button></div>
-<div class="subBtns"><button id="resetBtn" class="btn" type="button">↺ เริ่มใหม่</button><button class="btn" type="button">? วิธีใช้</button><button class="btn" type="button">⚙ ตั้งค่า</button></div>
-<details><summary>ข้อมูลเพิ่มเติม / Export</summary><div class="extraRow"><button id="clearCsvBtn" class="smallBtn" onclick="clearMeasurementsCSV()" type="button">ล้างข้อมูล CSV</button><button id="testBeepBtn" class="smallBtn" onclick="playWarningBeep('medium')" type="button">ทดสอบเสียงเตือน</button><button class="smallBtn" onclick="exportMeasurementsCSV()" type="button">Export CSV</button></div><ul id="featureList"></ul></details><details><summary>ประวัติล่าสุด</summary><ul id="history" class="history"></ul></details></div><script>
+<div class="mainBtns"><button id="voiceBtn" class="btn" type="button">🔊 ฟังผล</button><button id="saveBtn" class="btn" type="button">▯ บันทึกผล</button><button id="resetBtn" class="btn" type="button">↺ เริ่มใหม่</button></div>
+<div class="subBtns"><button id="howToBtn" class="btn" type="button">? วิธีใช้</button><button id="settingsBtn" class="btn" type="button">⚙ ตั้งค่า</button></div>
+<details><summary>ข้อมูลเพิ่มเติม / Export</summary><div class="extraRow"><button id="clearCsvBtn" class="smallBtn" onclick="clearMeasurementsCSV()" type="button">ล้างข้อมูล CSV</button><button id="testBeepBtn" class="smallBtn" onclick="playWarningBeep('medium')" type="button">ทดสอบเสียงเตือน</button><button class="smallBtn" onclick="exportMeasurementsCSV()" type="button">Export CSV</button></div><ul id="featureList"></ul></details><details><summary>ประวัติล่าสุด</summary><ul id="history" class="history"></ul></details>
+</div></div><script>
 let lastKnockTimeV2483 = -Infinity;
 
 /* ===== v25.0 Stable Knock Trigger =====
@@ -201,7 +552,7 @@ function extractBestKnockSegmentV2483(samples, sr){
 const NUM_TAPS = 3;
 const F_MIN = 100, F_MAX = 1000;
 let audioContext=null, mediaStream=null, analyser=null, freqData=null, timeData=null, rafId=null;
-let tapFeatures=[], listening=false, captureState="idle", eventFrames=[], cooldownFrames=0, noiseFloor=0.01;
+let tapFeatures=[], listening=false, sessionStarting=false, captureState="idle", eventFrames=[], cooldownFrames=0, noiseFloor=0.01;
 let lastSpeechText="";
 
 function clamp(x,lo,hi){return Math.max(lo,Math.min(hi,x));}
@@ -384,17 +735,17 @@ function classifyRipenessAI120(fPeak, Q, tau, fStd, fVar, hollowIndex, bw, highR
 function ripenessFromGroup(g){
   switch(g){
     case "A":
-      return {label:"อาจเน่า",detail:"อาจมีโพรงภายใน",color:"#616161",flesh:"#757575"};
+      return {label:"อาจเน่า",detail:"อาจมีโพรงภายใน",color:"#5f6368",flesh:"#9aa0a6",border:"#5f6368"};
     case "B":
-      return {label:"สุกเกิน",detail:"ระวัง อาจมีโพรงภายใน",color:"#BDBDBD",flesh:"#D6D6D6"};
+      return {label:"สุกเกิน",detail:"ระวัง อาจมีโพรงภายใน",color:"#9da3ad",flesh:"#d1d5db",border:"#9da3ad"};
     case "C":
-      return {label:"สุกพอดี",detail:"เหมาะรับประทาน",color:"#ef5350",flesh:"#ff5252"};
+      return {label:"สุกพอดี",detail:"พร้อมรับประทาน",color:"#ef2b2d",flesh:"#ff4a52",border:"#ef2b2d"};
     case "D":
-      return {label:"ใกล้สุก",detail:"ยังไม่ถึงจุดกินอร่อยที่สุด",color:"#ffee58",flesh:"#ffe082"};
+      return {label:"ใกล้สุก",detail:"เริ่มหวานขึ้น ยังไม่ถึงจุดพอดี",color:"#eba500",flesh:"#ffb46a",border:"#eba500"};
     case "E":
-      return {label:"ดิบ",detail:"ยังไม่เหมาะรับประทาน",color:"#cddc39",flesh:"#dce775"};
+      return {label:"ดิบ",detail:"เนื้อแน่น สด ยังไม่หวาน",color:"#2f9d44",flesh:"#f1f5d0",border:"#2f9d44"};
     default:
-      return {label:"ใกล้สุก",detail:"ยังไม่ถึงจุดกินอร่อยที่สุด",color:"#ffee58",flesh:"#ffe082"};
+      return {label:"ใกล้สุก",detail:"เริ่มหวานขึ้น ยังไม่ถึงจุดพอดี",color:"#eba500",flesh:"#ffb46a",border:"#eba500"};
   }
 }
 
@@ -422,54 +773,35 @@ async function setupAudio(){
   }
 }
 async function startSession(){
-  tapFeatures=[];updateTapProgress();setStatus("กำลังเตรียมไมโครโฟน...");
-function shareResult(){
-  const text =
-    document.getElementById("result").innerText +
-    "\nMelon Score: " + document.getElementById("melonScore").innerText +
-    "\nคำแนะนำ: " + document.getElementById("buyBadge").innerText +
-    "\n" + document.getElementById("signalBadge").innerText;
+  if(listening || sessionStarting) return;
+  sessionStarting = true;
 
-  // ดาวน์โหลด CSV ข้อมูลดิบทั้งหมดพร้อมกัน
-  const exported = downloadMeasurementsCSV(false);
+  tapFeatures = [];
+  updateTapProgress();
+  setStatus("กำลังเตรียมไมโครโฟน...");
+  setPrimaryActionLabel("กำลังวัด...", true);
 
-  if(navigator.share){
-    navigator.share({
-      title:"ผลวัดแตงโม MelodyMelonTap",
-      text: text + (exported ? "\n\nไฟล์ CSV ข้อมูลดิบถูกดาวน์โหลดไว้แล้ว" : "")
-    }).catch(()=>{});
-  }else{
-    alert(text + (exported ? "\n\nดาวน์โหลด CSV แล้ว" : "\n\nยังไม่มีข้อมูล CSV"));
+  const startBtn = document.getElementById("startBtn");
+  if(startBtn) startBtn.disabled = true;
+  setSignalQuality("รอวัด", "mid");
+
+  try{
+    await setupAudio();
+    await audioContext.resume();
+    listening = true;
+    sessionStarting = false;
+    captureState = "idle";
+    cooldownFrames = 0;
+    estimateNoiseFloor(12);
+  }catch(e){
+    console.error(e);
+    sessionStarting = false;
+    setStatus("ไม่สามารถเข้าถึงไมโครโฟนได้");
+    if(startBtn) startBtn.disabled = false;
+    setSignalQuality("ใช้งานไม่ได้", "bad");
+    setPrimaryActionLabel("เริ่มวัด", false);
   }
-}
-
-document.getElementById("startBtn").disabled=true;
-  setSignalQuality("รอวัด","mid");
-  try{await setupAudio();await audioContext.resume();listening=true;captureState="idle";cooldownFrames=0;estimateNoiseFloor(12);}
-  catch(e){console.error(e);setStatus("ไม่สามารถเข้าถึงไมโครโฟนได้");
-function shareResult(){
-  const text =
-    document.getElementById("result").innerText +
-    "\nMelon Score: " + document.getElementById("melonScore").innerText +
-    "\nคำแนะนำ: " + document.getElementById("buyBadge").innerText +
-    "\n" + document.getElementById("signalBadge").innerText;
-
-  // ดาวน์โหลด CSV ข้อมูลดิบทั้งหมดพร้อมกัน
-  const exported = downloadMeasurementsCSV(false);
-
-  if(navigator.share){
-    navigator.share({
-      title:"ผลวัดแตงโม MelodyMelonTap",
-      text: text + (exported ? "\n\nไฟล์ CSV ข้อมูลดิบถูกดาวน์โหลดไว้แล้ว" : "")
-    }).catch(()=>{});
-  }else{
-    alert(text + (exported ? "\n\nดาวน์โหลด CSV แล้ว" : "\n\nยังไม่มีข้อมูล CSV"));
-  }
-}
-
-document.getElementById("startBtn").disabled=false;setSignalQuality("ใช้งานไม่ได้","bad");}
-}
-function estimateNoiseFloor(n){
+}function estimateNoiseFloor(n){
   if(!listening)return;analyser.getFloatTimeDomainData(timeData);const rms=getRMS(timeData);noiseFloor=n===12?rms:0.85*noiseFloor+0.15*rms;
   if(n>0)requestAnimationFrame(()=>estimateNoiseFloor(n-1));else{setStatus(`พร้อมเคาะ (${tapFeatures.length+1}/${NUM_TAPS})`);loop();}
 }
@@ -544,6 +876,7 @@ function loop(){
         listening = false;
         analyzeSession();
         document.getElementById("startBtn").disabled = false;
+        setPrimaryActionLabel("เริ่มวัดใหม่",false);
         return;
       }
 
@@ -1017,7 +1350,7 @@ function analyzeSession(){
   if(warnLowQuality){scoreExplain += " • หมายเหตุ: สัญญาณรอบนี้ไม่นิ่ง ควรวัดซ้ำเพื่อยืนยัน";}
 
   setRipenessTheme(group);
-  updateWatermelonColor(ripe.flesh);
+  updateWatermelonColor(ripe.flesh,ripe.border);
   const result=document.getElementById("result");result.style.backgroundColor=ripe.color;result.innerHTML=`
     ความถี่เด่นเฉลี่ยจากการเคาะ 3 ครั้ง: ${avg.fPeak.toFixed(1)} Hz<br>
     ระดับความสุก: ${ripe.label} (${ripe.detail})<br>
@@ -1106,18 +1439,19 @@ function analyzeSession(){
     q_spread: Number(qSpread.toFixed(3)),
     tau_fallback_count: tauFallbackCount,
     measurement_status: warnLowQuality ? "ควรวัดซ้ำ" : "ใช้ได้",
-    model_version: "v2.26.4_ResultUI_AutoAI",
+    model_version: "v2.27.1_HomeScreen_StartFlow",
     boundary_ripeness_zone: isBoundaryRipeness
   });
 
 
 setStatus("ตรวจวัดเสร็จแล้ว");
+setPrimaryActionLabel("เริ่มวัดใหม่",false);
 }
 function showRetry(conf,sigLabel,sigScore,qSpread,tauSpread,tauFallbackCount){
   document.getElementById("result").style.backgroundColor="#fff3cd";document.getElementById("result").innerHTML=`ผลการวัดยังไม่นิ่ง<br>คุณภาพสัญญาณ: ${sigLabel} (${sigScore.toFixed(0)}%)<br>ความเชื่อมั่น: ${conf.toFixed(0)}%<br>กรุณาเคาะใหม่อีกครั้ง`;
   document.getElementById("confVal").innerText=`${conf.toFixed(0)} %`;document.getElementById("melonScore").innerText="-";const badge=document.getElementById("buyBadge");badge.className="buyBadge maybe";badge.innerText="ควรวัดใหม่";document.getElementById("scoreExplain").innerText="ผลรอบนี้ยังไม่นิ่งพอสำหรับการสรุป";setBar("confBar",conf);
   document.getElementById("featureList").innerHTML=`<li>Q spread: ${qSpread.toFixed(2)}</li><li>tau spread: ${tauSpread.toFixed(3)}</li><li>tau fallback: ${tauFallbackCount}/${NUM_TAPS}</li>`;
-  setStatus("ผลยังไม่นิ่ง กรุณาเคาะใหม่");speakText("ผลการวัดยังไม่นิ่ง กรุณาเคาะใหม่อีกครั้ง");
+  setStatus("ผลยังไม่นิ่ง กรุณาเคาะใหม่");setPrimaryActionLabel("เริ่มวัดใหม่",false);speakText("ผลการวัดยังไม่นิ่ง กรุณาเคาะใหม่อีกครั้ง");
 }
 
 
@@ -1245,17 +1579,36 @@ function speakText(text){
   }catch(e){console.log(e);}
 }
 function setRipenessTheme(group){
-  const map={A:"state-over",B:"state-over",C:"state-ripe",D:"state-near",E:"state-raw"};
-  document.body.classList.remove("state-raw","state-near","state-ripe","state-over");
+  const map={A:"state-rot",B:"state-over",C:"state-ripe",D:"state-near",E:"state-raw"};
+  document.body.classList.remove("state-raw","state-near","state-ripe","state-over","state-rot");
   if(map[group]) document.body.classList.add(map[group]);
 }
-function updateWatermelonColor(flesh){
+function updateWatermelonColor(flesh,border){
   const el=document.getElementById("watermelon");
-  if(el) el.style.background=`radial-gradient(circle at center, ${flesh} 0 68%, #2e7d32 69% 100%)`;
+  if(!el) return;
+  const f = flesh || "#ff4a52";
+  const b = border || "#ef2b2d";
+  if(el.style && typeof el.style.setProperty === "function"){
+    el.style.setProperty("--melon-flesh", f);
+    el.style.setProperty("--melon-ring", b);
+  }else if(el.style){
+    el.style["--melon-flesh"] = f;
+    el.style["--melon-ring"] = b;
+  }
+  if(el.style) el.style.borderColor = b;
 }
-function setSignalQuality(label,cls){const el=document.getElementById("signalBadge");el.innerText=`คุณภาพสัญญาณ: ${label}`;el.className=`sig sig-${cls}`;}
-function updateTapProgress(){document.getElementById("tapProgress").innerText=`${tapFeatures.length}/${NUM_TAPS}`;}
-function setStatus(msg){document.getElementById("status").innerText=`สถานะ: ${msg}`;}
+function setPrimaryActionLabel(label,busy=false){
+  const btn=document.getElementById("startBtn");
+  if(!btn) return;
+  btn.innerHTML=`${busy ? "⏺️" : "🎙️"} <span id="startBtnLabel">${label}</span>`;
+}
+function startMeasureFromTop(){
+  if(listening) return;
+  startSession();
+}
+function setSignalQuality(label,cls){const el=document.getElementById("signalBadge");if(!el)return;el.innerText=`คุณภาพสัญญาณ: ${label}`;el.className=`signalBadge sig sig-${cls}`;}
+function updateTapProgress(){const v=`${tapFeatures.length}/${NUM_TAPS}`;const a=document.getElementById("tapProgress"); if(a) a.innerText=v; const b=document.getElementById("tapProgressHero"); if(b) b.innerText=v;}
+function setStatus(msg){const el=document.getElementById("statusText")||document.getElementById("status");if(el)el.innerText=`สถานะ: ${msg}`;}
 function saveHistory(level,brix,conf,score,buy,sig){const h=JSON.parse(localStorage.getItem("history")||"[]");h.unshift({time:new Date().toLocaleString(),level,brix,conf,score,buy,sig});localStorage.setItem("history",JSON.stringify(h.slice(0,8)));updateHistory();}
 function updateHistory(){const h=JSON.parse(localStorage.getItem("history")||"[]");document.getElementById("history").innerHTML=h.map(x=>`<li>${x.time}: ${x.level} | ${safe(x.brix,0).toFixed(1)} °Bx | Score ${x.score}/100 | ${x.buy}</li>`).join("");}
 
@@ -1314,60 +1667,126 @@ function clearMeasurementsCSV(){
   }
 }
 
+function shareResult(){
+  const resultText = document.getElementById("result")?.innerText || "ยังไม่มีผลลัพธ์";
+  const scoreText = document.getElementById("melonScore")?.innerText || "-";
+  const buyText = document.getElementById("buyBadge")?.innerText || "-";
+  const signalText = document.getElementById("signalBadge")?.innerText || "";
+
+  const text =
+    resultText +
+    "\nMelon Score: " + scoreText +
+    "\nคำแนะนำ: " + buyText +
+    "\n" + signalText;
+
+  const exported = downloadMeasurementsCSV(false);
+
+  if(navigator.share){
+    navigator.share({
+      title:"ผลวัดแตงโม MelodyMelonTap",
+      text: text + (exported ? "\n\nไฟล์ CSV ข้อมูลดิบถูกดาวน์โหลดไว้แล้ว" : "")
+    }).catch(()=>{});
+  }else{
+    alert(text + (exported ? "\n\nดาวน์โหลด CSV แล้ว" : "\n\nยังไม่มีข้อมูล CSV"));
+  }
+}
+
 function resetAll(){
-  listening=false;if(rafId)cancelAnimationFrame(rafId);tapFeatures=[];captureState="idle";cooldownFrames=0;updateTapProgress();setStatus("พร้อมเริ่มวัด");
-function shareResult(){
-  const text =
-    document.getElementById("result").innerText +
-    "\nMelon Score: " + document.getElementById("melonScore").innerText +
-    "\nคำแนะนำ: " + document.getElementById("buyBadge").innerText +
-    "\n" + document.getElementById("signalBadge").innerText;
+  listening = false;
+  sessionStarting = false;
+  if(rafId) cancelAnimationFrame(rafId);
 
-  // ดาวน์โหลด CSV ข้อมูลดิบทั้งหมดพร้อมกัน
-  const exported = downloadMeasurementsCSV(false);
+  tapFeatures = [];
+  captureState = "idle";
+  cooldownFrames = 0;
 
-  if(navigator.share){
-    navigator.share({
-      title:"ผลวัดแตงโม MelodyMelonTap",
-      text: text + (exported ? "\n\nไฟล์ CSV ข้อมูลดิบถูกดาวน์โหลดไว้แล้ว" : "")
-    }).catch(()=>{});
-  }else{
-    alert(text + (exported ? "\n\nดาวน์โหลด CSV แล้ว" : "\n\nยังไม่มีข้อมูล CSV"));
+  updateTapProgress();
+  setStatus("พร้อมเริ่มวัด");
+
+  const startBtn = document.getElementById("startBtn");
+  if(startBtn) startBtn.disabled = false;
+  setPrimaryActionLabel("เริ่มวัด", false);
+
+  document.getElementById("result").innerHTML = "ยังไม่มีผลลัพธ์";
+
+  ["ripenessVal","brixVal","firmVal","juiceVal","hollowVal","confVal"]
+    .forEach(id => { const el = document.getElementById(id); if(el) el.innerText = "-"; });
+
+  ["sweetnessText","firmText","juiceText","hollowText","groupVal"]
+    .forEach(id => { const el = document.getElementById(id); if(el) el.innerText = "-"; });
+
+  const ami = document.getElementById("amiVal");
+  if(ami) ami.innerText = "พร้อมรับประทาน";
+
+  document.getElementById("melonScore").innerText = "-";
+  document.getElementById("buyBadge").className = "buyBadge";
+  document.getElementById("buyBadge").innerText = "-";
+  document.getElementById("scoreExplain").innerText = "ยังไม่มีการประเมิน";
+
+  ["brixBar","firmBar","juiceBar","hollowBar","confBar"].forEach(id => setBar(id, 0));
+
+  document.getElementById("featureList").innerHTML = "";
+  updateWatermelonColor("#ff4a52","#ef2b2d");
+  setSignalQuality("รอวัด", "mid");
+  document.body.classList.remove("state-raw","state-near","state-ripe","state-over","state-rot");
+
+  lastSpeechText = "";
+
+  const ai = document.getElementById("aiSummaryText");
+  if(ai) ai.innerText = "ผลสรุปจะแสดงหลังวิเคราะห์เสร็จ";
+
+  const cb = document.getElementById("clarityBadge");
+  if(cb){
+    cb.innerText = "-";
+    cb.className = "clarityBadge clarity-hidden";
   }
 }
-
-document.getElementById("startBtn").disabled=false;
-  document.getElementById("result").innerHTML="ยังไม่มีผลลัพธ์";["ripenessVal","brixVal","firmVal","juiceVal","hollowVal","confVal"].forEach(id=>document.getElementById(id).innerText="-");["amiVal","sweetnessText","firmText","juiceText","hollowText","groupVal"].forEach(id=>document.getElementById(id).innerText="-");document.getElementById("melonScore").innerText="-";document.getElementById("buyBadge").className="buyBadge";document.getElementById("buyBadge").innerText="-";document.getElementById("scoreExplain").innerText="ยังไม่มีการประเมิน";["brixBar","firmBar","juiceBar","hollowBar","confBar"].forEach(id=>setBar(id,0));document.getElementById("featureList").innerHTML="";updateWatermelonColor("#ff5252");setSignalQuality("รอวัด","mid");document.body.classList.remove("state-raw","state-near","state-ripe","state-over");lastSpeechText="";const ai=document.getElementById("aiSummaryText");if(ai)ai.innerText="ผลสรุปจะแสดงหลังวิเคราะห์เสร็จ";
+function showHomeScreen(){
+  const home=document.getElementById("homeScreen");
+  const result=document.getElementById("resultScreen");
+  if(home) home.hidden=false;
+  if(result) result.hidden=true;
 }
-
-
-function shareResult(){
-  const text =
-    document.getElementById("result").innerText +
-    "\nMelon Score: " + document.getElementById("melonScore").innerText +
-    "\nคำแนะนำ: " + document.getElementById("buyBadge").innerText +
-    "\n" + document.getElementById("signalBadge").innerText;
-
-  // ดาวน์โหลด CSV ข้อมูลดิบทั้งหมดพร้อมกัน
-  const exported = downloadMeasurementsCSV(false);
-
-  if(navigator.share){
-    navigator.share({
-      title:"ผลวัดแตงโม MelodyMelonTap",
-      text: text + (exported ? "\n\nไฟล์ CSV ข้อมูลดิบถูกดาวน์โหลดไว้แล้ว" : "")
-    }).catch(()=>{});
-  }else{
-    alert(text + (exported ? "\n\nดาวน์โหลด CSV แล้ว" : "\n\nยังไม่มีข้อมูล CSV"));
-  }
+function showResultScreen(){
+  const home=document.getElementById("homeScreen");
+  const result=document.getElementById("resultScreen");
+  if(home) home.hidden=true;
+  if(result) result.hidden=false;
+}
+async function startFromHome(){
+  showResultScreen();
+  resetAll();
+  await startSession();
+}
+function openHomeHistory(){
+  showResultScreen();
+  const detailsList=document.querySelectorAll ? document.querySelectorAll("details") : [];
+  const historyDetails=detailsList && detailsList.length ? detailsList[detailsList.length-1] : null;
+  if(historyDetails) historyDetails.open=true;
+  setTimeout(()=>{ try{historyDetails && historyDetails.scrollIntoView({behavior:"smooth",block:"start"});}catch(e){} },80);
+}
+function showHomeHowTo(){
+  alert("วิธีใช้: กดเริ่มวัดเสียงเคาะ แล้วเคาะแตงโม 3 ครั้งให้เสียงชัดและห่างกันเล็กน้อย ระบบจะวิเคราะห์และอ่านผลให้อัตโนมัติ");
+}
+function showHomeSettings(){
+  alert("ตั้งค่า: เวอร์ชันนี้ใช้ค่ามาตรฐานสำหรับการวิเคราะห์เสียงเคาะแตงโม");
 }
 
 document.getElementById("startBtn").addEventListener("click",startSession);
 document.getElementById("resetBtn").addEventListener("click",resetAll);
 document.getElementById("shareBtn").addEventListener("click",shareResult);
+const tapAgainBtn=document.getElementById("tapAgainBtn"); if(tapAgainBtn) tapAgainBtn.addEventListener("click",startMeasureFromTop);
+const tapManualBtn=document.getElementById("tapManualBtn"); if(tapManualBtn) tapManualBtn.addEventListener("click",startMeasureFromTop);
+const howToBtn=document.getElementById("howToBtn"); if(howToBtn) howToBtn.addEventListener("click",()=>alert("วิธีใช้: กดเริ่มวัด แล้วเคาะแตงโม 3 ครั้งให้เสียงสม่ำเสมอ ระบบจะวิเคราะห์และอ่านผลให้โดยอัตโนมัติ"));
+const settingsBtn=document.getElementById("settingsBtn"); if(settingsBtn) settingsBtn.addEventListener("click",()=>alert("หน้าตั้งค่าจะเพิ่มในเวอร์ชันถัดไป"));
+const homeStartBtn=document.getElementById("homeStartBtn"); if(homeStartBtn) homeStartBtn.addEventListener("click",startFromHome);
+const homeHistoryBtn=document.getElementById("homeHistoryBtn"); if(homeHistoryBtn) homeHistoryBtn.addEventListener("click",openHomeHistory);
+const homeHowToBtn=document.getElementById("homeHowToBtn"); if(homeHowToBtn) homeHowToBtn.addEventListener("click",showHomeHowTo);
+const homeSettingsBtn=document.getElementById("homeSettingsBtn"); if(homeSettingsBtn) homeSettingsBtn.addEventListener("click",showHomeSettings);
 const voiceBtn=document.getElementById("voiceBtn"); if(voiceBtn) voiceBtn.addEventListener("click",()=>{ if(lastSpeechText) speakText(lastSpeechText); });
 const saveBtn=document.getElementById("saveBtn"); if(saveBtn) saveBtn.addEventListener("click",shareResult);
 if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}
-updateHistory();updateWatermelonColor("#ff5252");
+updateHistory();updateWatermelonColor("#ff4a52","#ef2b2d");setPrimaryActionLabel("เริ่มวัด",false);
 
 function getTriggerDebugTextV2483(features){
   if(!features || !features.trigger_debug) return "";

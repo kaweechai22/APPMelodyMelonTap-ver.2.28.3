@@ -1,0 +1,7 @@
+Patch v2.26.5 - UI aligned to designed mockup
+- moved primary Start Measure button to top hero area under watermelon
+- added quick top buttons: tap again and plus button
+- moved status and signal quality inside hero card
+- converted bottom actions to white secondary buttons: ฟังผล / บันทึกผล / เริ่มใหม่
+- kept core analysis logic and IDs
+- added simple วิธีใช้ / ตั้งค่า placeholder buttons
