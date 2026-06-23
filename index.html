@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>MelodyMelonTap v2.30.9 Selected Result Icon</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.png"/><meta name="theme-color" content="#df1f2d"/><style>
+<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>MelodyMelonTap v2.31.0 Header Left Icon No Menu</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.png"/><meta name="theme-color" content="#df1f2d"/><style>
 :root{
   --theme:#df1f2d; --theme2:#ff4d5e; --soft:#fff1f2; --soft2:#ffe4e6;
   --ink:#1f2933; --muted:#6b7280; --card:#ffffff; --line:#eceff3;
@@ -2050,8 +2050,109 @@ body.state-rot .hero .ripenessProCard{
   .headlineIconImg{border-radius:14px!important}
 }
 
+
+/* ===== v2.31.0: remove hamburger + left analysis icon header ===== */
+
+/* top bar after removing the left menu */
+.topbar.noMenu{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 44px!important;
+  align-items:center!important;
+  gap:10px!important;
+}
+.topbar.noMenu .brand{
+  justify-self:start!important;
+  min-width:0;
+}
+.topbar.noMenu .shareIconBtn{
+  justify-self:end!important;
+}
+
+/* result analysis headline: icon on left, text on right */
+.resultHeadline{
+  display:grid!important;
+  grid-template-columns:68px minmax(0,1fr)!important;
+  grid-template-rows:auto auto!important;
+  column-gap:16px!important;
+  row-gap:2px!important;
+  align-items:center!important;
+  justify-content:start!important;
+  text-align:left!important;
+  padding:16px 18px!important;
+  min-height:104px!important;
+}
+.resultHeadline:before,
+.resultHeadline:after{
+  display:none!important;
+}
+.resultHeadline .headlineBadge,
+.resultHeadline .selectedResultIconBadge{
+  grid-column:1!important;
+  grid-row:1 / span 2!important;
+  justify-self:center!important;
+  align-self:center!important;
+  width:64px!important;
+  height:64px!important;
+  border-radius:20px!important;
+}
+.resultHeadline .headlineText{
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:end!important;
+  justify-self:start!important;
+  text-align:left!important;
+  font-size:1.34rem!important;
+  line-height:1.1!important;
+  letter-spacing:-.02em!important;
+  margin:0!important;
+  color:#17212b!important;
+}
+.resultHeadline .headlineSub{
+  grid-column:2!important;
+  grid-row:2!important;
+  align-self:start!important;
+  justify-self:start!important;
+  text-align:left!important;
+  max-width:100%!important;
+  font-size:.91rem!important;
+  line-height:1.3!important;
+  margin-top:2px!important;
+  color:#5b6572!important;
+}
+.resultHeadline .headlineIconImg{
+  border-radius:16px!important;
+}
+@media(max-width:430px){
+  .topbar.noMenu{
+    grid-template-columns:minmax(0,1fr) 42px!important;
+  }
+  .topbar.noMenu .brand{
+    font-size:1.38rem!important;
+  }
+  .resultHeadline{
+    grid-template-columns:58px minmax(0,1fr)!important;
+    column-gap:12px!important;
+    padding:14px 15px!important;
+    min-height:92px!important;
+    border-radius:22px!important;
+  }
+  .resultHeadline .headlineBadge,
+  .resultHeadline .selectedResultIconBadge{
+    width:56px!important;
+    height:56px!important;
+    border-radius:18px!important;
+  }
+  .resultHeadline .headlineText{
+    font-size:1.12rem!important;
+  }
+  .resultHeadline .headlineSub{
+    font-size:.78rem!important;
+    line-height:1.26!important;
+  }
+}
+
 </style></head><body><div class="bgFruit"></div><div class="wrap">
-<header class="topbar"><button class="iconBtn" aria-label="เมนู">☰</button><div class="brand">Melody<span class="red">Melon</span>Tap <span class="melon">🍉</span></div><button class="iconBtn shareIconBtn" id="shareBtn" aria-label="แชร์ข้อมูล"><svg class="shareIconSvg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+<header class="topbar noMenu"><div class="brand">Melody<span class="red">Melon</span>Tap <span class="melon">🍉</span></div><button class="iconBtn shareIconBtn" id="shareBtn" aria-label="แชร์ข้อมูล"><svg class="shareIconSvg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
   <circle cx="46" cy="16" r="8" fill="currentColor"/>
   <circle cx="18" cy="32" r="8" fill="currentColor"/>
   <circle cx="46" cy="48" r="8" fill="currentColor"/>
@@ -3382,7 +3483,7 @@ function analyzeSession(){
     q_spread: Number(qSpread.toFixed(3)),
     tau_fallback_count: tauFallbackCount,
     measurement_status: warnLowQuality ? "ควรวัดซ้ำ" : "ใช้ได้",
-    model_version: "v2.30.9_SelectedResultIcon",
+    model_version: "v2.31.0_HeaderLeftIcon_NoMenu",
     boundary_ripeness_zone: isBoundaryRipeness
   });
 
