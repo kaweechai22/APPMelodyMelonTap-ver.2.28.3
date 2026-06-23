@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>MelodyMelonTap v2.30.0 Modern Icon UI</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.png"/><meta name="theme-color" content="#df1f2d"/><style>
+<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>MelodyMelonTap v2.30.2 Thai Speech Confirm Text</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.png"/><meta name="theme-color" content="#df1f2d"/><style>
 :root{
   --theme:#df1f2d; --theme2:#ff4d5e; --soft:#fff1f2; --soft2:#ffe4e6;
   --ink:#1f2933; --muted:#6b7280; --card:#ffffff; --line:#eceff3;
@@ -1006,8 +1006,114 @@ summary{padding:18px 18px}
   .homeStartBtn .soundMark .startWaveIcon{width:40px;height:40px}
 }
 
+
+/* ===== v2.30.1 UI balance + Thai speech polish ===== */
+.shareIconBtn{display:grid!important;place-items:center;color:#374151}
+.shareIconBtn .shareIconSvg{width:26px;height:26px;display:block}
+
+.ripenessBand.fiveLevels{
+  width:100%;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:0;
+  border-radius:20px!important;
+  overflow:hidden;
+  margin:0 auto 20px!important;
+}
+.ripenessBand.fiveLevels .ripenessSeg{
+  min-width:0;
+  min-height:52px;
+  padding:6px 4px;
+  text-align:center;
+  font-size:.92rem;
+  line-height:1.15;
+  white-space:normal;
+}
+.ripenessSeg.over{background:#bfc2c8;color:#374151}
+.ripenessSeg.rot{background:#666b73;color:#fff}
+
+.measureActions{grid-template-columns:1fr 1fr!important;gap:12px!important;width:100%}
+.primaryBtn,.secondaryBtn{
+  min-height:62px!important;
+  border-radius:22px!important;
+  font-size:1.05rem!important;
+  letter-spacing:.01em;
+}
+.primaryBtn{
+  background:linear-gradient(135deg,#ff4d5a,#ef233c)!important;
+  color:#fff!important;
+  box-shadow:0 14px 28px rgba(239,35,60,.24)!important;
+}
+.secondaryBtn{
+  background:linear-gradient(180deg,#fff,#fff5f6)!important;
+  color:#ef233c!important;
+  border:1.6px solid rgba(239,35,60,.22)!important;
+  box-shadow:0 12px 24px rgba(239,35,60,.10)!important;
+}
+.secondaryBtn .resetIcon{
+  width:38px;height:38px;border-radius:14px;
+  display:grid;place-items:center;
+  background:rgba(239,35,60,.09);
+}
+.secondaryBtn .resetIconSvg{width:24px;height:24px;display:block}
+
+.featureGrid{
+  width:100%!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:10px!important;
+  align-items:stretch;
+  justify-content:center;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.featureCard{min-width:0;padding-left:6px!important;padding-right:6px!important}
+.featureTitle{
+  min-height:2.4em!important;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.metrics{
+  width:100%!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  justify-content:center;
+}
+.metric{min-width:0}
+
+.mainBtns{max-width:420px!important;margin:18px auto 0!important}
+.saveDataBtn{
+  min-height:66px!important;
+  border-radius:22px!important;
+  background:linear-gradient(135deg,#ff4d5a,#ef233c)!important;
+  display:flex!important;align-items:center;justify-content:center;gap:12px;
+  font-size:1.16rem!important;
+  box-shadow:0 14px 28px rgba(239,35,60,.22)!important;
+}
+.saveDataIcon{
+  width:42px;height:42px;border-radius:15px;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.18);
+}
+.saveDataIconSvg{width:28px;height:28px;display:block}
+@media(max-width:420px){
+  .ripenessBand.fiveLevels .ripenessSeg{font-size:.76rem;min-height:48px}
+  .featureGrid{gap:7px!important}
+  .featureCard{padding-top:12px!important}
+  .featureTitle{font-size:.78rem!important}
+  .measureActions{gap:8px!important}
+  .primaryBtn,.secondaryBtn{font-size:.94rem!important;min-height:58px!important}
+  .secondaryBtn .resetIcon{width:34px;height:34px}
+  .saveDataBtn{min-height:62px!important;font-size:1.08rem!important}
+}
+
 </style></head><body><div class="bgFruit"></div><div class="wrap">
-<header class="topbar"><button class="iconBtn" aria-label="เมนู">☰</button><div class="brand">Melody<span class="red">Melon</span>Tap <span class="melon">🍉</span></div><button class="iconBtn" id="shareBtn" aria-label="แชร์">⇧</button></header>
+<header class="topbar"><button class="iconBtn" aria-label="เมนู">☰</button><div class="brand">Melody<span class="red">Melon</span>Tap <span class="melon">🍉</span></div><button class="iconBtn shareIconBtn" id="shareBtn" aria-label="แชร์ข้อมูล"><svg class="shareIconSvg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <circle cx="46" cy="16" r="8" fill="currentColor"/>
+  <circle cx="18" cy="32" r="8" fill="currentColor"/>
+  <circle cx="46" cy="48" r="8" fill="currentColor"/>
+  <path d="M25 29l14-9M25 35l14 9" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+</svg></button></header>
 
 <section id="homeScreen" class="homeScreen">
   <div class="homeStage">
@@ -1085,11 +1191,12 @@ summary{padding:18px 18px}
     </div>
 
     <div class="sectionDivider"><span class="dot">•</span> ระดับการสุก <span class="dot">•</span></div>
-    <div class="ripenessBand">
-      <div class="ripenessSeg raw">🌿 ดิบ</div>
-      <div class="ripenessSeg near">☀ ใกล้สุก</div>
-      <div class="ripenessSeg ripe">🍉 สุกพอดี</div>
-      <div class="ripenessSeg bad">⚠ อาจเน่า/สุกเกิน</div>
+    <div class="ripenessBand fiveLevels">
+      <div class="ripenessSeg raw">ดิบ</div>
+      <div class="ripenessSeg near">ใกล้สุก</div>
+      <div class="ripenessSeg ripe">สุกพอดี</div>
+      <div class="ripenessSeg over">สุกเกิน</div>
+      <div class="ripenessSeg rot">อาจเน่า</div>
     </div>
 
     <div class="bottomTools singleTool">
@@ -1132,7 +1239,10 @@ summary{padding:18px 18px}
     <path d="M12 32v0"/><path d="M22 24v16"/><path d="M32 14v36"/><path d="M42 22v20"/><path d="M52 30v4"/>
   </g>
 </svg></span><span id="startBtnLabel" class="startText">เริ่มวัด</span></button>
-    <button id="resetBtn" class="btn secondaryBtn" type="button">↺ เริ่มวัดใหม่</button>
+    <button id="resetBtn" class="btn secondaryBtn" type="button"><span class="resetIcon" aria-hidden="true"><svg class="resetIconSvg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <path d="M47 20a20 20 0 1 0 5 21" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+  <path d="M47 10v16H31" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></span><span>เริ่มวัดใหม่</span></button>
   </div>
 
   <div class="heroMeta heroMetaSingle">
@@ -1216,8 +1326,13 @@ summary{padding:18px 18px}
     </div>
   </div>
 </section>
-<div class="aiCard"><div class="aiBot">🤖</div><div><div class="aiTitle">สรุปโดย AI</div><div id="aiSummaryText" class="aiText">ผลสรุปโดย AI จะปรากฏและอ่านออกเสียงอัตโนมัติหลังวิเคราะห์เสร็จ</div></div></div>
-<div class="mainBtns"><button id="saveBtn" class="btn" type="button">▯ บันทึกผล</button></div>
+<div class="aiCard"><div class="aiBot">🤖</div><div><div class="aiTitle">สรุปโดย AI</div><div id="aiSummaryText" class="aiText">สรุปโดย AI จะปรากฏและอ่านออกเสียงอัตโนมัติหลังวิเคราะห์เสร็จ</div></div></div>
+<div class="mainBtns"><button id="saveBtn" class="btn saveDataBtn" type="button"><span class="saveDataIcon" aria-hidden="true"><svg class="saveDataIconSvg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <ellipse cx="32" cy="16" rx="18" ry="8" fill="currentColor" opacity=".95"/>
+  <path d="M14 16v22c0 5 8 9 18 9s18-4 18-9V16" fill="none" stroke="currentColor" stroke-width="6"/>
+  <path d="M14 27c0 5 8 9 18 9s18-4 18-9" fill="none" stroke="currentColor" stroke-width="5" opacity=".65"/>
+  <path d="M32 41v13m0 0l-7-7m7 7l7-7" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></span><span>บันทึกข้อมูล</span></button></div>
 <details><summary>ข้อมูลเพิ่มเติม / Export</summary><div class="extraRow"><button id="clearCsvBtn" class="smallBtn" onclick="clearMeasurementsCSV()" type="button">ล้างข้อมูล CSV</button><button class="smallBtn" onclick="exportMeasurementsCSV()" type="button">Export CSV</button></div><ul id="featureList"></ul></details><details><summary>ประวัติล่าสุด</summary><ul id="history" class="history"></ul></details>
 </div></div><script>
 let lastKnockTimeV2483 = -Infinity;
@@ -1453,7 +1568,7 @@ function getV1BoundaryClarity(avgPeakFreq){
     needRetest,
     boundary: nearest.boundary,
     distance: nearest.distance,
-    text: needRetest ? "⚠ ควรเคาะซ้ำเพื่อยืนยันผล" : "✓ ผลวิเคราะห์ชัดเจน",
+    text: needRetest ? "⚠ ควรเคาะซ้ำเพื่อยืนยันอีกครั้ง" : "✓ ผลวิเคราะห์ชัดเจน",
     cls: needRetest ? "clarityBadge clarity-warn" : "clarityBadge clarity-ok"
   };
 }
@@ -2060,7 +2175,7 @@ function getRipenessBoundaryClarityV250(group, fMean){
     needRetest,
     boundary: nearest.boundary,
     distance: nearest.distance,
-    text: needRetest ? "⚠ ควรเคาะซ้ำเพื่อยืนยันผล" : "✓ ผลวิเคราะห์ชัดเจน",
+    text: needRetest ? "⚠ ควรเคาะซ้ำเพื่อยืนยันอีกครั้ง" : "✓ ผลวิเคราะห์ชัดเจน",
     cls: needRetest ? "clarityBadge clarity-warn" : "clarityBadge clarity-ok"
   };
 }
@@ -2193,7 +2308,7 @@ function analyzeSession(){
   }
 
   if(clarityV250 && clarityV250.needRetest){
-    scoreExplain += " • ควรเคาะซ้ำเพื่อยืนยันผล";
+    scoreExplain += " • ควรเคาะซ้ำเพื่อยืนยันอีกครั้ง";
   }
   if(warnLowQuality){scoreExplain += " • หมายเหตุ: สัญญาณรอบนี้ไม่นิ่ง ควรวัดซ้ำเพื่อยืนยัน";}
 
@@ -2313,7 +2428,7 @@ function analyzeSession(){
     q_spread: Number(qSpread.toFixed(3)),
     tau_fallback_count: tauFallbackCount,
     measurement_status: warnLowQuality ? "ควรวัดซ้ำ" : "ใช้ได้",
-    model_version: "v2.30.0_ModernIconUI",
+    model_version: "v2.30.2_ThaiSpeechConfirmText",
     boundary_ripeness_zone: isBoundaryRipeness
   });
 
@@ -2412,10 +2527,10 @@ function describeJuiceLevel(value,label=""){
 }
 function describeConfidenceLevel(value){
   const v = Number(value || 0);
-  if(v >= 90) return "ผลวิเคราะห์มีความเชื่อมั่นสูงมาก";
-  if(v >= 80) return "ผลวิเคราะห์มีความเชื่อมั่นสูง";
-  if(v >= 70) return "ผลวิเคราะห์มีความเชื่อมั่นอยู่ในระดับดี";
-  return "ผลวิเคราะห์มีความเชื่อมั่นปานกลาง ควรพิจารณาร่วมกับการเคาะซ้ำ";
+  if(v >= 90) return "ความเชื่อมั่นของการวิเคราะห์อยู่ในระดับสูงมาก";
+  if(v >= 80) return "ความเชื่อมั่นของการวิเคราะห์อยู่ในระดับสูง";
+  if(v >= 70) return "ความเชื่อมั่นของการวิเคราะห์อยู่ในระดับดี";
+  return "ความเชื่อมั่นของการวิเคราะห์อยู่ในระดับปานกลาง ควรพิจารณาร่วมกับการเคาะซ้ำ";
 }
 function getRealisticQualityPhrases(summary){
   const group = summary.group || "";
@@ -2509,13 +2624,13 @@ function speakSummaryAI(summary){
   }else if(Number(summary.hollowPercent) >= 12){
     displayParts.push("มีโพรงภายในเล็กน้อย");
     speechParts.push("มีโพรงภายในเล็กน้อย");
-    speechParts.push("ควรเคาะซ้ำเพื่อยืนยันผล");
+    speechParts.push("ควรเคาะซ้ำเพื่อยืนยันอีกครั้ง");
   }
 
   speechParts.push(confDesc);
   if(summary.buyText) speechParts.push(summary.buyText);
   if(summary.clarityText && summary.clarityText.includes("ควรเคาะซ้ำ") && Number(summary.hollowPercent) < 12){
-    speechParts.push("ควรเคาะซ้ำเพื่อยืนยันผล");
+    speechParts.push("ควรเคาะซ้ำเพื่อยืนยันอีกครั้ง");
   }
 
   const display = displayParts.filter(Boolean).join(" ");
@@ -2716,7 +2831,7 @@ function resetAll(){
   lastSpeechText = "";
 
   const ai = document.getElementById("aiSummaryText");
-  if(ai) ai.innerText = "ผลสรุปโดย AI จะปรากฏและอ่านออกเสียงอัตโนมัติหลังวิเคราะห์เสร็จ";
+  if(ai) ai.innerText = "สรุปโดย AI จะปรากฏและอ่านออกเสียงอัตโนมัติหลังวิเคราะห์เสร็จ";
 
   const cb = document.getElementById("clarityBadge");
   if(cb){
