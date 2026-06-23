@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>MelodyMelonTap v2.30.2 Thai Speech Confirm Text</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.png"/><meta name="theme-color" content="#df1f2d"/><style>
+<!DOCTYPE html><html lang="th"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>MelodyMelonTap v2.30.5 Screenshot Patch AI Natural</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.png"/><meta name="theme-color" content="#df1f2d"/><style>
 :root{
   --theme:#df1f2d; --theme2:#ff4d5e; --soft:#fff1f2; --soft2:#ffe4e6;
   --ink:#1f2933; --muted:#6b7280; --card:#ffffff; --line:#eceff3;
@@ -1107,6 +1107,662 @@ summary{padding:18px 18px}
   .saveDataBtn{min-height:62px!important;font-size:1.08rem!important}
 }
 
+
+/* ===== v2.30.3 Professional result balance ===== */
+
+/* 1) Ripeness result panel */
+.ripenessProCard{
+  align-self:stretch;
+  background:linear-gradient(180deg,#ffffff 0%, #fff9fa 100%) !important;
+  border:1px solid rgba(233,194,200,.78) !important;
+  border-radius:26px !important;
+  padding:16px 16px 18px !important;
+  box-shadow:0 14px 30px rgba(15,23,42,.06), inset 0 1px 0 rgba(255,255,255,.75);
+  gap:12px !important;
+}
+.ripenessHeader{
+  width:100%;
+  min-height:38px !important;
+  padding:8px 14px !important;
+  border-radius:999px !important;
+  font-size:1rem !important;
+  font-weight:900 !important;
+  letter-spacing:.01em;
+}
+.heroText{
+  width:100%;
+  display:grid !important;
+  grid-template-columns:28px 1fr !important;
+  align-items:start;
+  gap:8px 10px !important;
+  margin-top:2px;
+}
+.heroText .crown{
+  font-size:1.55rem !important;
+  line-height:1;
+  color:var(--theme);
+  margin-top:2px;
+}
+.ripeness{
+  font-size:2.15rem !important;
+  line-height:1.02 !important;
+  font-weight:900 !important;
+  letter-spacing:-.02em;
+  margin:0 !important;
+}
+.ami{
+  grid-column:2;
+  font-size:1.02rem !important;
+  line-height:1.35 !important;
+  color:#4b5563 !important;
+  margin-top:2px !important;
+  font-weight:700;
+}
+.statusLine{
+  width:100%;
+  display:flex !important;
+  align-items:flex-start !important;
+  gap:10px !important;
+  margin-top:2px !important;
+  padding:10px 12px !important;
+  border-radius:16px !important;
+  background:rgba(248,250,252,.88);
+  border:1px solid rgba(226,232,240,.95);
+  font-size:.96rem !important;
+  line-height:1.42 !important;
+}
+.statusDot{
+  width:12px !important;
+  height:12px !important;
+  margin-top:4px !important;
+}
+.heroBadgeRow,.clarityWrap{
+  width:100%;
+  display:flex !important;
+  justify-content:flex-start !important;
+}
+.signalBadge,.clarityBadge{
+  display:inline-flex !important;
+  align-items:center;
+  min-height:42px;
+  padding:10px 14px !important;
+  border-radius:16px !important;
+  font-size:.96rem !important;
+  font-weight:900 !important;
+  line-height:1.3 !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55);
+}
+.clarityBadge{
+  margin-top:0 !important;
+}
+
+/* 2) Start / reset buttons aligned and more modern */
+.measureActions{
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:12px !important;
+  width:100%;
+  margin-top:12px !important;
+}
+.primaryBtn,.secondaryBtn{
+  grid-column:auto !important;
+  width:100% !important;
+  min-height:62px !important;
+  border-radius:20px !important;
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:12px 16px !important;
+  font-size:1.02rem !important;
+  font-weight:900 !important;
+}
+.primaryBtn .startIcon,
+.secondaryBtn .resetIcon{
+  width:38px !important;
+  height:38px !important;
+  border-radius:13px !important;
+  display:grid !important;
+  place-items:center !important;
+}
+.primaryBtn{
+  background:linear-gradient(135deg,#ff5964 0%, #ef233c 100%) !important;
+  box-shadow:0 14px 28px rgba(239,35,60,.22) !important;
+}
+.primaryBtn .startIcon{
+  background:rgba(255,255,255,.16) !important;
+}
+.primaryBtn .startWaveIcon{
+  width:22px !important;
+  height:22px !important;
+}
+.secondaryBtn{
+  background:linear-gradient(180deg,#ffffff 0%, #fff7f8 100%) !important;
+  color:#ef233c !important;
+  border:1.5px solid rgba(239,35,60,.22) !important;
+  box-shadow:0 12px 24px rgba(239,35,60,.08) !important;
+}
+.secondaryBtn .resetIcon{
+  background:rgba(239,35,60,.10) !important;
+}
+.secondaryBtn .resetIconSvg{
+  width:22px !important;
+  height:22px !important;
+}
+
+/* 3) Metric cards / stars balanced */
+.metrics{
+  margin-top:18px !important;
+  display:grid !important;
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:14px !important;
+}
+.metric{
+  min-width:0 !important;
+  padding:16px 14px !important;
+  border-radius:24px !important;
+  display:grid !important;
+  grid-template-columns:58px minmax(0,1fr) !important;
+  align-items:start !important;
+  gap:12px !important;
+  overflow:hidden;
+}
+.metric.wide{
+  grid-column:1 / -1 !important;
+  grid-template-columns:58px minmax(0,1fr) !important;
+}
+.mIcon{
+  width:58px !important;
+  height:58px !important;
+  align-self:start;
+}
+.mMain{
+  width:100% !important;
+  min-width:0 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+}
+.mLabel{
+  font-size:1rem !important;
+  line-height:1.2 !important;
+  font-weight:800 !important;
+  color:#1f2937 !important;
+}
+.mValue{
+  font-size:1.42rem !important;
+  line-height:1.05 !important;
+  margin-top:6px !important;
+  word-break:break-word;
+}
+.mSub{
+  font-size:.92rem !important;
+  line-height:1.34 !important;
+  margin-top:6px !important;
+  color:#5b6472 !important;
+}
+.mStars{
+  display:block !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
+  text-overflow:clip !important;
+  font-size:.88rem !important;
+  line-height:1 !important;
+  letter-spacing:.02em !important;
+  margin:10px 0 8px !important;
+  transform-origin:left center;
+}
+.bar{
+  width:100% !important;
+  height:10px !important;
+  margin-top:4px !important;
+  border-radius:999px !important;
+}
+.fill{
+  border-radius:999px !important;
+}
+
+/* confidence card typography */
+.metric.wide .mValue{font-size:1.7rem !important}
+.metric.wide .mSub{font-size:.98rem !important}
+
+/* mobile polish */
+@media(max-width:420px){
+  .hero{
+    grid-template-columns:1fr !important;
+    gap:14px !important;
+  }
+  .heroVisual{
+    order:1;
+  }
+  .ripenessProCard{
+    order:2;
+    padding:15px 14px 16px !important;
+  }
+  .ripeness{
+    font-size:2rem !important;
+  }
+  .measureActions{
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+  }
+  .primaryBtn,.secondaryBtn{
+    min-height:58px !important;
+    font-size:.95rem !important;
+    padding:10px 12px !important;
+  }
+  .metrics{
+    gap:12px !important;
+  }
+  .metric{
+    padding:14px 12px !important;
+    grid-template-columns:54px minmax(0,1fr) !important;
+  }
+  .mIcon{
+    width:54px !important;
+    height:54px !important;
+  }
+  .mLabel{
+    font-size:.96rem !important;
+  }
+  .mValue{
+    font-size:1.34rem !important;
+  }
+  .mSub{
+    font-size:.88rem !important;
+  }
+  .mStars{
+    font-size:.78rem !important;
+    letter-spacing:0 !important;
+    margin:8px 0 7px !important;
+  }
+}
+
+
+/* ===== v2.30.4 final detail polish ===== */
+:root{
+  --text-strong:#17212b;
+  --text-soft:#55606d;
+}
+body{
+  letter-spacing:0;
+  color:var(--text-strong);
+}
+.sectionTitle{
+  font-size:1.9rem!important;
+  letter-spacing:-.02em!important;
+}
+.hero{
+  border-radius:32px!important;
+  padding:18px 16px 18px!important;
+  gap:14px 14px!important;
+}
+.knockCount{
+  font-size:1.02rem!important;
+  letter-spacing:-.01em!important;
+}
+.knockCount b,.knockCount span{font-weight:900!important}
+.ripenessProCard{
+  border-radius:28px!important;
+  padding:18px 17px 18px!important;
+}
+.ripenessHeader{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.42);
+}
+.ripeness{
+  color:var(--text-strong)!important;
+}
+.ami{
+  color:var(--text-soft)!important;
+}
+.statusLine{
+  color:#374151!important;
+}
+.signalBadge,.clarityBadge{
+  border:1px solid rgba(15,23,42,.05);
+}
+.signalBadge.sig-good{
+  background:linear-gradient(180deg,#e8f8ec,#dff5e1)!important;
+  color:#166534!important;
+}
+.signalBadge.sig-mid{
+  background:linear-gradient(180deg,#fff8de,#fff1bf)!important;
+  color:#8a6500!important;
+}
+.signalBadge.sig-bad{
+  background:linear-gradient(180deg,#ffe9e9,#fee2e2)!important;
+  color:#b91c1c!important;
+}
+.clarity-ok{
+  background:linear-gradient(180deg,#e4f7e8,#d9f5df)!important;
+  color:#176b25!important;
+}
+.clarity-warn{
+  background:linear-gradient(180deg,#fff7dc,#fff0b6)!important;
+  color:#8a6500!important;
+}
+.primaryBtn,.secondaryBtn,.saveDataBtn{
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.primaryBtn:active,.secondaryBtn:active,.saveDataBtn:active{
+  transform:translateY(1px) scale(.995);
+}
+.primaryBtn{
+  border-radius:22px!important;
+}
+.secondaryBtn{
+  border-radius:22px!important;
+}
+.heroMetaSingle .tapPill{
+  min-height:54px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  padding:10px 14px!important;
+}
+.metrics{
+  gap:16px!important;
+}
+.metric{
+  border-radius:26px!important;
+  box-shadow:0 12px 28px rgba(15,23,42,.055)!important;
+}
+.metric:hover{box-shadow:0 14px 32px rgba(15,23,42,.06)!important}
+.mLabel{
+  font-size:1.02rem!important;
+  letter-spacing:-.01em!important;
+}
+.mValue{
+  font-size:1.46rem!important;
+  letter-spacing:-.02em!important;
+}
+.mSub{
+  min-height:2.45em;
+}
+.metric.wide .mSub{
+  min-height:auto;
+}
+.mStars{
+  display:flex!important;
+  align-items:center!important;
+  gap:2px!important;
+  max-width:100%!important;
+  overflow:hidden!important;
+  font-size:.84rem!important;
+  letter-spacing:0!important;
+}
+.bar{
+  height:11px!important;
+  margin-top:6px!important;
+}
+.fill{
+  box-shadow:0 1px 2px rgba(239,35,60,.12) inset;
+}
+.mainBtns{
+  max-width:440px!important;
+}
+.saveDataBtn{
+  border-radius:22px!important;
+}
+summary{
+  font-size:1.04rem!important;
+  letter-spacing:-.01em!important;
+}
+.history li,.featureList li{
+  line-height:1.45!important;
+}
+@media(max-width:430px){
+  .sectionTitle{font-size:1.7rem!important}
+  .hero{padding:16px 13px 16px!important;gap:13px!important}
+  .ripenessProCard{padding:15px 13px 15px!important;border-radius:24px!important}
+  .ripenessHeader{font-size:.95rem!important;min-height:36px!important;padding:8px 12px!important}
+  .heroText{grid-template-columns:24px 1fr!important;gap:6px 8px!important}
+  .heroText .crown{font-size:1.36rem!important}
+  .ripeness{font-size:1.86rem!important;line-height:1.02!important}
+  .ami{font-size:.96rem!important;line-height:1.32!important}
+  .statusLine{padding:9px 11px!important;font-size:.91rem!important;line-height:1.38!important}
+  .signalBadge,.clarityBadge{min-height:40px!important;font-size:.9rem!important;padding:9px 12px!important;border-radius:14px!important}
+  .measureActions{gap:10px!important}
+  .primaryBtn,.secondaryBtn{min-height:56px!important;font-size:.94rem!important;padding:10px 12px!important;border-radius:18px!important}
+  .primaryBtn .startIcon,.secondaryBtn .resetIcon{width:34px!important;height:34px!important;border-radius:12px!important}
+  .heroMetaSingle .tapPill{min-height:50px!important;padding:9px 12px!important;font-size:.95rem!important}
+  .metrics{gap:12px!important}
+  .metric{padding:13px 11px!important;grid-template-columns:50px minmax(0,1fr)!important;border-radius:22px!important}
+  .metric.wide{grid-template-columns:50px minmax(0,1fr)!important}
+  .mIcon{width:50px!important;height:50px!important}
+  .mLabel{font-size:.94rem!important;line-height:1.18!important}
+  .mValue{font-size:1.26rem!important;line-height:1.04!important}
+  .metric.wide .mValue{font-size:1.5rem!important}
+  .mSub{font-size:.84rem!important;line-height:1.28!important;min-height:2.35em}
+  .metric.wide .mSub{font-size:.9rem!important}
+  .mStars{font-size:.74rem!important;gap:1px!important;margin:8px 0 7px!important}
+  .bar{height:10px!important}
+  .mainBtns{margin-top:16px!important}
+  .saveDataBtn{min-height:60px!important;font-size:1.03rem!important;border-radius:20px!important}
+}
+
+
+/* ===== v2.30.5 screenshot patch: result card / reset button / stars ===== */
+
+/* compact, professional ripeness card */
+.hero .ripenessProCard{
+  width:100%;
+  box-sizing:border-box;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  gap:10px!important;
+}
+.hero .ripenessHeader{
+  min-height:40px!important;
+  border-radius:18px!important;
+  background:linear-gradient(135deg,#5f666d,#454b52)!important;
+  color:#fff!important;
+  font-size:1rem!important;
+}
+.hero .heroText{
+  display:grid!important;
+  grid-template-columns:26px minmax(0,1fr)!important;
+  column-gap:10px!important;
+  row-gap:2px!important;
+  align-items:start!important;
+  padding:4px 2px 0!important;
+}
+.hero .crown{
+  font-size:1.35rem!important;
+  color:#60666d!important;
+}
+.hero .ripeness{
+  color:#4a4f55!important;
+  font-size:2rem!important;
+  line-height:1.04!important;
+  letter-spacing:-.015em!important;
+  margin:0!important;
+  overflow-wrap:anywhere;
+}
+.hero .ami{
+  color:#303640!important;
+  font-size:1.02rem!important;
+  line-height:1.36!important;
+  font-weight:800!important;
+}
+.hero .statusLine{
+  display:flex!important;
+  align-items:center!important;
+  padding:10px 12px!important;
+  border-radius:16px!important;
+  background:#f8fafc!important;
+  border:1px solid #edf0f2!important;
+  color:#343b45!important;
+  font-size:.94rem!important;
+  font-weight:800!important;
+}
+.hero .statusDot{
+  width:10px!important;height:10px!important;margin-top:0!important;box-shadow:0 0 0 4px rgba(34,197,94,.10);
+}
+.hero .heroBadgeRow,.hero .clarityWrap{
+  margin:0!important;
+  width:100%!important;
+}
+.hero .signalBadge,.hero .clarityBadge{
+  max-width:100%!important;
+  min-height:38px!important;
+  padding:9px 12px!important;
+  border-radius:14px!important;
+  font-size:.92rem!important;
+  line-height:1.25!important;
+  white-space:normal!important;
+  text-align:left!important;
+}
+
+/* keep start and reset as a balanced pair */
+.hero .measureActions{
+  grid-column:1 / -1!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+  width:100%!important;
+  margin-top:12px!important;
+}
+.hero .primaryBtn,.hero .secondaryBtn{
+  grid-column:auto!important;
+  min-width:0!important;
+  width:100%!important;
+  min-height:60px!important;
+  border-radius:22px!important;
+  font-size:1rem!important;
+  padding:10px 12px!important;
+  box-sizing:border-box!important;
+}
+.hero .secondaryBtn{
+  background:linear-gradient(180deg,#fff,#fff6f7)!important;
+  color:#df1f36!important;
+  border:1.6px solid rgba(223,31,54,.23)!important;
+}
+.hero .secondaryBtn .resetIcon{
+  width:34px!important;height:34px!important;border-radius:12px!important;
+}
+.hero .secondaryBtn .resetIconSvg{
+  width:21px!important;height:21px!important;
+}
+
+/* metric card structure: no star overflow */
+.metrics{
+  width:100%!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+  overflow:hidden!important;
+}
+.metric{
+  min-width:0!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  display:grid!important;
+  grid-template-columns:52px minmax(0,1fr)!important;
+  gap:10px!important;
+  align-items:start!important;
+  padding:14px 11px!important;
+  min-height:170px!important;
+  border-radius:24px!important;
+}
+.metric.wide{
+  grid-column:1 / -1!important;
+  grid-template-columns:52px minmax(0,1fr)!important;
+  min-height:132px!important;
+}
+.mIcon{
+  width:52px!important;
+  height:52px!important;
+  flex:0 0 52px!important;
+}
+.mMain{
+  min-width:0!important;
+  width:100%!important;
+  display:grid!important;
+  grid-template-rows:auto auto minmax(2.1em,auto) auto auto!important;
+  align-content:start!important;
+}
+.mLabel{
+  font-size:.95rem!important;
+  line-height:1.18!important;
+  font-weight:900!important;
+  overflow-wrap:anywhere!important;
+}
+.mValue{
+  font-size:1.32rem!important;
+  line-height:1.05!important;
+  margin-top:4px!important;
+  overflow-wrap:anywhere!important;
+}
+.mSub{
+  font-size:.84rem!important;
+  line-height:1.28!important;
+  color:#5f6875!important;
+  margin-top:5px!important;
+  min-height:2.15em!important;
+}
+.metric.wide .mSub{
+  min-height:auto!important;
+}
+.mStars{
+  width:100%!important;
+  min-width:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:1.5px!important;
+  overflow:hidden!important;
+  margin:8px 0 7px!important;
+  line-height:1!important;
+  font-size:0!important;
+  letter-spacing:0!important;
+  white-space:nowrap!important;
+}
+.mStars .starDot{
+  flex:0 0 12px!important;
+  width:12px!important;
+  height:12px!important;
+  display:inline-grid!important;
+  place-items:center!important;
+  font-size:11px!important;
+  line-height:1!important;
+  color:#d7dde4!important;
+}
+.mStars .starDot.on{
+  color:#f6c32e!important;
+  filter:drop-shadow(0 1px 1px rgba(180,130,0,.14));
+}
+.bar{
+  width:100%!important;
+  height:10px!important;
+  margin-top:2px!important;
+  overflow:hidden!important;
+}
+.metric.wide .mStars .starDot{
+  flex-basis:14px!important;
+  width:14px!important;height:14px!important;font-size:13px!important;
+}
+
+/* extra narrow phones */
+@media(max-width:390px){
+  .metrics{gap:10px!important}
+  .metric{
+    grid-template-columns:48px minmax(0,1fr)!important;
+    padding:13px 10px!important;
+    gap:9px!important;
+  }
+  .mIcon{width:48px!important;height:48px!important;flex-basis:48px!important}
+  .mLabel{font-size:.9rem!important}
+  .mValue{font-size:1.2rem!important}
+  .mSub{font-size:.8rem!important}
+  .mStars .starDot{flex-basis:10.5px!important;width:10.5px!important;height:10.5px!important;font-size:10px!important}
+  .hero .primaryBtn,.hero .secondaryBtn{font-size:.9rem!important}
+}
+
 </style></head><body><div class="bgFruit"></div><div class="wrap">
 <header class="topbar"><button class="iconBtn" aria-label="เมนู">☰</button><div class="brand">Melody<span class="red">Melon</span>Tap <span class="melon">🍉</span></div><button class="iconBtn shareIconBtn" id="shareBtn" aria-label="แชร์ข้อมูล"><svg class="shareIconSvg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
   <circle cx="46" cy="16" r="8" fill="currentColor"/>
@@ -1221,7 +1877,7 @@ summary{padding:18px 18px}
     <div class="knockCount">เคาะ: <b><span id="tapProgress">0/3</span></b> ครั้ง</div>
   </div>
 
-  <div class="heroInfo">
+  <div class="heroInfo ripenessProCard">
     <div class="ripenessHeader">ระดับการสุก</div>
     <div class="heroText">
       <div class="crown">♛</div>
@@ -1524,7 +2180,14 @@ function getFallback(k){
   return {Q:10.5,tau:0.11,fPeak:250,fMean:280,fStd:95,fVar:10000,hollow:0.18,bw:25,highRatio:0.1,lowRatio:0.5,flatness:0.15}[k] ?? 0;
 }
 function setBar(id,p){const el=document.getElementById(id); if(el) el.style.width=clamp(p,0,100)+"%";}
-function renderStars(n){n=clamp(Math.round(safe(n,0)),0,5);return "⭐".repeat(n)+"☆".repeat(5-n);} function setStars(id,n){const el=document.getElementById(id); if(el) el.innerText=renderStars(n);}
+function renderStars(n){
+  n = clamp(Math.round(safe(n,0)),0,5);
+  return Array.from({length:5},(_,i)=>`<span class="starDot ${i<n?"on":"off"}">★</span>`).join("");
+}
+function setStars(id,n){
+  const el=document.getElementById(id);
+  if(el) el.innerHTML = renderStars(n);
+}
 function toStars(value,min,max){return Math.round(clamp((safe(value,min)-min)/(max-min),0,1)*5);}
 function trimmedMean(values){
   const vals=values.filter(Number.isFinite).sort((a,b)=>a-b);
@@ -2428,7 +3091,7 @@ function analyzeSession(){
     q_spread: Number(qSpread.toFixed(3)),
     tau_fallback_count: tauFallbackCount,
     measurement_status: warnLowQuality ? "ควรวัดซ้ำ" : "ใช้ได้",
-    model_version: "v2.30.2_ThaiSpeechConfirmText",
+    model_version: "v2.30.5_ScreenshotPatch_AINatural",
     boundary_ripeness_zone: isBoundaryRipeness
   });
 
@@ -2608,7 +3271,6 @@ function speakSummaryAI(summary){
   const sweetDesc = q.sweet;
   const firmDesc = q.firm;
   const juiceDesc = q.juice;
-  const confDesc = describeConfidenceLevel(summary.confidence);
 
   displayParts.push(sweetDesc);
   displayParts.push(firmDesc);
@@ -2627,7 +3289,6 @@ function speakSummaryAI(summary){
     speechParts.push("ควรเคาะซ้ำเพื่อยืนยันอีกครั้ง");
   }
 
-  speechParts.push(confDesc);
   if(summary.buyText) speechParts.push(summary.buyText);
   if(summary.clarityText && summary.clarityText.includes("ควรเคาะซ้ำ") && Number(summary.hollowPercent) < 12){
     speechParts.push("ควรเคาะซ้ำเพื่อยืนยันอีกครั้ง");
